@@ -1,0 +1,7 @@
+# C# gen code
+*/bin/
+*/obj/
+
+# IDE config
+.idea/
+*/.idea/
