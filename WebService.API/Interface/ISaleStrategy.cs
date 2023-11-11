@@ -1,4 +1,4 @@
-namespace WebService.API.Logical;
+namespace WebService.API.Interface;
 
 public interface ISaleStrategy
 {
