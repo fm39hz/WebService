@@ -6,13 +6,13 @@ var _builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 _builder.Services.AddControllers();
-_builder.Services.AddDbContext<ItemDbContext>(options => options.UseSqlServer( 
-		_builder.Configuration.GetConnectionString("ItemContext"),
+_builder.Services.AddDbContext<ItemDbContext>(options => options.UseSqlServer(
+	_builder.Configuration.GetConnectionString("ItemContext"),
 	optionsBuilder => optionsBuilder.EnableRetryOnFailure(
-		maxRetryCount: 3,
-		maxRetryDelay: TimeSpan.FromSeconds(5),
-		errorNumbersToAdd: null)
-		));
+		3,
+		TimeSpan.FromSeconds(5),
+		null)
+	));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 _builder.Services.AddEndpointsApiExplorer();
