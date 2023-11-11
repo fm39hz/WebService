@@ -8,5 +8,7 @@ public class ItemDbContext : DbContext
 	{
 	}
 
-	public DbSet<Item> Items { get; set; } = null!;
+	public DbSet<Cpu> Cpus { get; set; } = null!;
+	public DbSet<Vga> Vgas { get; set; } = null!;
+	public DbSet<Item> AllItem { get; set; } = null!;
 }

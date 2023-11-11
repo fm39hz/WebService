@@ -1,6 +1,6 @@
 namespace WebService.API.Models;
 
-public class Vga
+public class Vga : Item
 {
 	
 }
