@@ -1,4 +1,6 @@
-namespace WebService.API.Models;
+using WebService.API.VirtualBase;
+
+namespace WebService.API.Datas.Models;
 
 public record VgaSpec : ISpecifications
 {

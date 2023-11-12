@@ -1,4 +1,4 @@
-namespace WebService.API.Models;
+namespace WebService.API.VirtualBase;
 
 public interface ISpecifications
 {

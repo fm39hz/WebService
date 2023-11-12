@@ -1,6 +1,6 @@
-using WebService.API.Interface;
+using WebService.API.VirtualBase;
 
-namespace WebService.API.Models;
+namespace WebService.API.Datas.Models;
 
 public record Item
 {
