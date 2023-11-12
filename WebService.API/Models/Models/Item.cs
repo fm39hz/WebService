@@ -6,6 +6,8 @@ public record Item
 {
 	public Item()
 	{
+		FinalPrice = BasePrice;
+		SpecId = 0;
 	}
 
 	public Item(IPromoteStrategy promotes, ISpecifications spec)
