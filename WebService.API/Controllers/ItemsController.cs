@@ -1,5 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using WebService.API.DBContext;
+using WebService.API.Interface;
+using WebService.API.Interface.PromoteStrategy;
 using WebService.API.Models;
 
 namespace WebService.API.Controllers;
@@ -15,7 +18,7 @@ public class ItemsController : ControllerBase
 		_context = context;
 	}
 
-	// GET: api/Cpus
+	// GET: api/Items
 	[HttpGet]
 	public async Task<ActionResult<IEnumerable<Item>>> GetItems()
 	{
@@ -26,7 +29,7 @@ public class ItemsController : ControllerBase
 		return await _context.Items.ToListAsync();
 	}
 
-	// GET: api/Cpus/5
+	// GET: api/Items/5
 	[HttpGet("{id:long}")]
 	public async Task<ActionResult<Item>> GetItem(long id)
 	{
@@ -44,17 +47,45 @@ public class ItemsController : ControllerBase
 		return _item;
 	}
 
+	private static ISpecifications WhichItemType(string type, long id)
+	{
+		return type switch
+		{
+			"cpu" => new CpuSpec
+			{
+				Id = id
+			},
+			"vga" => new VgaSpec
+			{
+				Id = id
+			},
+			_ => throw new InvalidDataException()
+		};
+	}
+
+	private static IPromoteStrategy WhichStrategy(int strategy)
+	{
+		return strategy switch
+		{
+			15 => new FifteenPercentDiscount(),
+			_ => new NoDiscount()
+		};
+	}
+
 	// PUT: api/Cpus/5
 	// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
 	[HttpPut("{id:long}")]
-	public async Task<IActionResult> PutItem(long id, Item item)
+	public async Task<IActionResult> PutItem(long id, Item item, string type, int discount)
 	{
 		if (id != item.Id)
 		{
 			return BadRequest();
 		}
-
-		_context.Entry(item).State = EntityState.Modified;
+		var _item = new Item(WhichStrategy(discount), WhichItemType(type, item.SpecId))
+		{
+			Id = item.Id
+		};
+		_context.Entry(_item).State = EntityState.Modified;
 
 		try
 		{
