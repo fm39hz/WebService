@@ -47,7 +47,7 @@ public class ItemsController : ControllerBase
 		return _item;
 	}
 
-	private static ISpecifications WhichItemType(string type, long id)
+	private static ISpecifications GetItemType(string type, long id)
 	{
 		return type switch
 		{
@@ -63,7 +63,7 @@ public class ItemsController : ControllerBase
 		};
 	}
 
-	private static IPromoteStrategy WhichStrategy(int strategy)
+	private static IPromoteStrategy GetStrategy(int strategy)
 	{
 		return strategy switch
 		{
@@ -74,14 +74,14 @@ public class ItemsController : ControllerBase
 
 	// PUT: api/Cpus/5
 	// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-	[HttpPut("{id:long}")]
+	[HttpPut("{id:long}:{type:alpha}&{discount:int}")]
 	public async Task<IActionResult> PutItem(long id, Item item, string type, int discount)
 	{
 		if (id != item.Id)
 		{
 			return BadRequest();
 		}
-		var _item = new Item(WhichStrategy(discount), WhichItemType(type, item.SpecId))
+		var _item = new Item(GetStrategy(discount), GetItemType(type, item.SpecId))
 		{
 			Id = item.Id
 		};
