@@ -25,7 +25,40 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5234/api/Items/",
+					"raw": "http://localhost:5234/api/Items",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5234",
+					"path": [
+						"api",
+						"Items"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5234/api/Items",
+			"id": "e2468576-79ce-4966-9ed7-d357f1cf9385",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n    {\r\n        \"id\": 0,\r\n        \"name\": \"i5 10400f\",\r\n        \"description\": \"CPU i5 gen 14\",\r\n        \"basePrice\": 6000000,\r\n        \"itemType\": \"CPU\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5234/api/Items/0",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -34,7 +67,7 @@
 					"path": [
 						"api",
 						"Items",
-						""
+						"0"
 					]
 				}
 			},
