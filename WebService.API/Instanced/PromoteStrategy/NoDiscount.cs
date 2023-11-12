@@ -1,4 +1,6 @@
-namespace WebService.API.VirtualBase.PromoteStrategy;
+using WebService.API.VirtualBase;
+
+namespace WebService.API.Instanced.PromoteStrategy;
 
 public class NoDiscount : IPromoteStrategy
 {
