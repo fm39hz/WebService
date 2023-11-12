@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using WebService.API.Models;
+using WebService.API.DBContext;
 
 var _builder = WebApplication.CreateBuilder(args);
 
