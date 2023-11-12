@@ -1,3 +1,11 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using WebService.Tools.Generators;
 
-Console.WriteLine("Hello, World!");
+namespace WebService.Tools.AutoRunner;
+
+public static class AutoRunner
+{
+	public static void Main()
+	{
+		ControllersGenerator.Generate();
+	}
+}
