@@ -2,7 +2,7 @@ using WebService.API.Interface;
 
 namespace WebService.API.Models;
 
-public class Item
+public record Item
 {
 	public Item()
 	{
