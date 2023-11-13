@@ -1,4 +1,4 @@
-namespace WebService.API.Interface;
+namespace WebService.API.VirtualBase;
 
 public interface IPromoteStrategy
 {

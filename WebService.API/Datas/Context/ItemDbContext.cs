@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using WebService.API.Models;
+using WebService.API.Datas.Models;
 
-namespace WebService.API.DBContext;
+namespace WebService.API.Datas.DBContext;
 
 public class ItemDbContext : DbContext
 {
