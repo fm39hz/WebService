@@ -4,9 +4,9 @@ using WebService.API.VirtualBase;
 
 namespace WebService.API.Controllers;
 
-public static class AbstractController
+public static class AbstractRedirect
 {
-	public static ISpecifications GetSpec(string type, long id)
+	public static ISpecifications GetSpecifications(string type, long id)
 	{
 		return type switch
 		{

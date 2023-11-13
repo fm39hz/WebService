@@ -10,8 +10,9 @@ public record Item
 		SpecId = 0;
 	}
 
-	public Item(IPromoteStrategy promotes, ISpecifications spec)
+	public Item(IPromoteStrategy promotes, ISpecifications spec, double basePrice)
 	{
+		BasePrice = basePrice;
 		FinalPrice = promotes.DoDiscount(BasePrice);
 		SpecId = spec.Id;
 	}
