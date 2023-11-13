@@ -1,9 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WebService.API.VirtualBase;
-using WebService.API.Datas.Models;
 using WebService.API.Datas.DBContext;
-using WebService.API.Instanced.PromoteStrategy;
+using WebService.API.Datas.Models;
 
 namespace WebService.API.Controllers;
 
@@ -48,10 +46,9 @@ public class ItemsController : ControllerBase
 	}
 
 
-
 	// PUT: api/Items/5
 	// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-	[HttpPut("{id:long}")]
+	[HttpPut("{id:long}/{type:alpha}/{discount:int}")]
 	public async Task<IActionResult> PutItem(long id, Item item, string type, int discount)
 	{
 		if (id != item.Id)
