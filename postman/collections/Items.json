@@ -47,10 +47,17 @@
 			},
 			"request": {
 				"method": "PUT",
-				"header": [],
+				"header": [
+					{
+						"key": "type",
+						"value": "cpu",
+						"type": "text",
+						"disabled": true
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "\r\n    {\r\n        \"id\": 0,\r\n        \"name\": \"i5 10400f\",\r\n        \"description\": \"CPU i5 gen 14\",\r\n        \"basePrice\": 6000000,\r\n        \"itemType\": \"CPU\"\r\n    }",
+					"raw": "{\r\n\t\"id\": 6,\r\n\t\"name\": \"i7 14700k\",\r\n\t\"description\": \"CPU i7 gen 14\",\r\n\t\"basePrice\": 17000000,\r\n\t\"finalPrice\": 15990000,\r\n\t\"specId\": 106\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -58,7 +65,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5234/api/Items/0",
+					"raw": "http://localhost:5234/api/Items/6/cpu/15",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -67,7 +74,43 @@
 					"path": [
 						"api",
 						"Items",
-						"0"
+						"6",
+						"cpu",
+						"15"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5234/api/Items/6",
+			"id": "9758bd76-8576-48fc-bb3e-9c22151c1029",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"id\": 6,\r\n\t\"name\": \"i7 14700k\",\r\n\t\"description\": \"CPU i7 gen 14\",\r\n\t\"basePrice\": 17000000,\r\n\t\"finalPrice\": 15990000,\r\n\t\"specId\": 106\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5234/api/Items/6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5234",
+					"path": [
+						"api",
+						"Items",
+						"6"
 					]
 				}
 			},
