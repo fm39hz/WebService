@@ -1,13 +1,13 @@
 using Microsoft.EntityFrameworkCore;
-using WebService.API.Datas.DBContext;
+using WebService.API.Datas.Context;
 
 var _builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 _builder.Services.AddControllers();
-_builder.Services.AddDbContext<ItemDbContext>(options => options.UseSqlServer(
-	_builder.Configuration.GetConnectionString("ItemContext"),
+_builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(
+	_builder.Configuration.GetConnectionString("DataContext"),
 	optionsBuilder => optionsBuilder.EnableRetryOnFailure(
 		3,
 		TimeSpan.FromSeconds(5),

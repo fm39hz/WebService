@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WebService.API.Datas.DBContext;
+using WebService.API.Datas.Context;
 using WebService.API.Datas.Models;
 
 namespace WebService.API.Controllers;
@@ -9,9 +9,9 @@ namespace WebService.API.Controllers;
 [ApiController]
 public class ItemsController : ControllerBase
 {
-	private readonly ItemDbContext _context;
+	private readonly DataContext _context;
 
-	public ItemsController(ItemDbContext context)
+	public ItemsController(DataContext context)
 	{
 		_context = context;
 	}
