@@ -2,8 +2,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebService.API", "WebService.API\WebService.API.csproj", "{829F71B8-45E4-4B8E-A5D4-6CB4EE22A73F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebService.Tools", "WebService.Tools\WebService.Tools.csproj", "{BC53107A-9603-41FA-96E0-2B79B1A60A4A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -14,9 +12,5 @@ Global
 		{829F71B8-45E4-4B8E-A5D4-6CB4EE22A73F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{829F71B8-45E4-4B8E-A5D4-6CB4EE22A73F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{829F71B8-45E4-4B8E-A5D4-6CB4EE22A73F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BC53107A-9603-41FA-96E0-2B79B1A60A4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BC53107A-9603-41FA-96E0-2B79B1A60A4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BC53107A-9603-41FA-96E0-2B79B1A60A4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BC53107A-9603-41FA-96E0-2B79B1A60A4A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
