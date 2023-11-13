@@ -10,11 +10,11 @@ public static class AbstractRedirect
 	{
 		return type switch
 		{
-			"cpu" => new CpuSpec
+			"cpu" => new Cpu
 			{
 				Id = id
 			},
-			"vga" => new VgaSpec
+			"vga" => new Vga
 			{
 				Id = id
 			},
