@@ -55,13 +55,15 @@ public class ItemsController : ControllerBase
 		{
 			return BadRequest();
 		}
-		var _item = new Item(AbstractController.GetPromote(discount), AbstractController.GetSpec(type, item.SpecId))
-		{
-			Id = item.Id,
-			Name = item.Name,
-			BasePrice = item.BasePrice,
-			Description = item.Description
-		};
+		var _item = new Item(
+			AbstractRedirect.GetPromote(discount),
+			AbstractRedirect.GetSpecifications(type, item.SpecId),
+			item.BasePrice)
+			{
+				Id = item.Id,
+				Name = item.Name,
+				Description = item.Description
+			};
 		_context.Entry(_item).State = EntityState.Modified;
 
 		try
