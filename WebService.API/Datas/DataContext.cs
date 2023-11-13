@@ -9,7 +9,7 @@ public class DataContext : DbContext
 	{
 	}
 
-	public DbSet<Item> Items { get; set; } = null!;
+	public DbSet<Product> Products { get; set; } = null!;
 	public DbSet<Vga> Vgas { get; set; } = null!;
 	public DbSet<Cpu> Cpus { get; set; } = null!;
 }

@@ -2,15 +2,15 @@ using WebService.API.VirtualBase;
 
 namespace WebService.API.Datas.Models;
 
-public record Item
+public record Product
 {
-	public Item()
+	public Product()
 	{
 		FinalPrice = BasePrice;
 		SpecId = 0;
 	}
 
-	public Item(IPromoteStrategy promotes, ISpecifications spec, double basePrice)
+	public Product(IPromoteStrategy promotes, ISpecifications spec, double basePrice)
 	{
 		BasePrice = basePrice;
 		FinalPrice = promotes.DoDiscount(BasePrice);
