@@ -47,41 +47,18 @@ public class ItemsController : ControllerBase
 		return _item;
 	}
 
-	private static ISpecifications GetSpec(string type, long id)
-	{
-		return type switch
-		{
-			"cpu" => new CpuSpec
-			{
-				Id = id
-			},
-			"vga" => new VgaSpec
-			{
-				Id = id
-			},
-			_ => throw new InvalidDataException()
-		};
-	}
 
-	private static IPromoteStrategy GetStrategy(int strategy)
-	{
-		return strategy switch
-		{
-			15 => new FifteenPercentDiscount(),
-			_ => new NoDiscount()
-		};
-	}
 
 	// PUT: api/Items/5
 	// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
 	[HttpPut("{id:long}")]
-	public async Task<IActionResult> PutItem(long id, Item item,string type,int discount)
+	public async Task<IActionResult> PutItem(long id, Item item, string type, int discount)
 	{
 		if (id != item.Id)
 		{
 			return BadRequest();
 		}
-		var _item = new Item(GetStrategy(discount), GetSpec(type, item.SpecId))
+		var _item = new Item(AbstractController.GetPromote(discount), AbstractController.GetSpec(type, item.SpecId))
 		{
 			Id = item.Id,
 			Name = item.Name,
