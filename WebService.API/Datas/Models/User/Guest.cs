@@ -1,8 +1,10 @@
+using WebService.API.VirtualBase;
+
 namespace WebService.API.Datas.Models;
 
-public class Guest : User
+public record Guest : User
 {
-	public Guest(string userName, string userCredentials) : base(userName, userCredentials)
+	public Guest(SignInCredential credential) : base(credential)
 	{
 	}
 

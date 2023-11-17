@@ -1,3 +1,5 @@
+using WebService.API.VirtualBase;
+
 namespace WebService.API.Datas.Models;
 
 internal enum Permission
@@ -7,9 +9,9 @@ internal enum Permission
 	Remove
 }
 
-public class Admin : User
+public record Admin : User
 {
-	public Admin(string userName, string userCredentials) : base(userName, userCredentials)
+	public Admin(SignInCredential credential) : base(credential)
 	{
 	}
 
