@@ -2,31 +2,34 @@ using Firebase.Auth;
 
 namespace WebService.API.Service;
 
-public class FirebaseAuthService
+public sealed class FirebaseAuthService
 {
-	private readonly FirebaseAuthClient _firebaseAuth;
-
-	public FirebaseAuthService(FirebaseAuthClient firebaseAuth)
+	private FirebaseAuthService()
 	{
-		_firebaseAuth = firebaseAuth;
+		Instance.Client = new(new FirebaseAuthConfig
+		{
+			ApiKey = "",
+			AuthDomain = ""
+		});
 	}
 
-	public async Task<string?> SignUp(string email, string password)
-	{
-		var _userCredentials = await _firebaseAuth.CreateUserWithEmailAndPasswordAsync(email, password);
+	private static FirebaseAuthService Instance { get; } = new();
+	private FirebaseAuthClient Client { get; set; }
 
+	public static async Task<string?> SignUp(string email, string password)
+	{
+		var _userCredentials = await Instance.Client.CreateUserWithEmailAndPasswordAsync(email, password);
 		return _userCredentials is null? null : await _userCredentials.User.GetIdTokenAsync();
 	}
 
-	public async Task<string?> Login(string email, string password)
+	public static async Task<string?> Login(string email, string password)
 	{
-		var _userCredentials = await _firebaseAuth.SignInWithEmailAndPasswordAsync(email, password);
-
+		var _userCredentials = await Instance.Client.SignInWithEmailAndPasswordAsync(email, password);
 		return _userCredentials is null? null : await _userCredentials.User.GetIdTokenAsync();
 	}
 
-	public void SignOut()
+	public static void SignOut()
 	{
-		_firebaseAuth.SignOut();
+		Instance.Client.SignOut();
 	}
 }
