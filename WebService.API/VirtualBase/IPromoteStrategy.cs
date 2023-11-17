@@ -1,4 +1,4 @@
-using WebService.API.Datas.Models;
+using WebService.API.Datas.Models.Products;
 
 namespace WebService.API.VirtualBase;
 
