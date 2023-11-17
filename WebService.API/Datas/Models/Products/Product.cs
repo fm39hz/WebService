@@ -1,6 +1,6 @@
 using WebService.API.VirtualBase;
 
-namespace WebService.API.Datas.Models;
+namespace WebService.API.Datas.Models.Products;
 
 public record Product(ISpecifications Specifications)
 {

@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebService.API.Datas.Context;
-using WebService.API.Datas.Models;
+using WebService.API.Datas.Models.Products;
 
 namespace WebService.API.Controllers;
 

@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using WebService.API.Datas.Models;
+using WebService.API.Datas.Models.Products;
 
 namespace WebService.API.Datas.Context;
 

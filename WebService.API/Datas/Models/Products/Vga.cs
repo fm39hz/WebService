@@ -1,7 +1,7 @@
 using Newtonsoft.Json;
 using WebService.API.VirtualBase;
 
-namespace WebService.API.Datas.Models;
+namespace WebService.API.Datas.Models.Products;
 
 public record Vga : ISpecifications
 {
