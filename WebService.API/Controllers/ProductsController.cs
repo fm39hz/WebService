@@ -55,7 +55,7 @@ public class ProductsController : ControllerBase
 		{
 			return BadRequest();
 		}
-		var _item = new Product(AbstractRedirect.GetSpecifications(type, product.SpecId))
+		var _item = new Product(AbstractRedirect.GetSpecifications(type, product.Specifications.Id))
 		{
 			Id = product.Id,
 			Name = product.Name,
