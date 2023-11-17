@@ -15,19 +15,19 @@ public record Cpu : ISpecifications
 
 	public string GetSpec()
 	{
-		var props = new Dictionary<string, dynamic?>()
+		var _specification = new Dictionary<string, dynamic?>()
 		{
-			{"Id", Id},
-			{"Brand", Brand},
-			{"Socket", Socket},
-			{"Voltage", Voltage},
-			{"Core", Core},
-			{"Thread", Thread},
-			{"Frequency", Frequency}
+			{ "Id", Id },
+			{ "Brand", Brand },
+			{ "Socket", Socket },
+			{ "Voltage", Voltage },
+			{ "Core", Core },
+			{ "Thread", Thread },
+			{ "Frequency", Frequency }
 		};
-#if DEBUG
-		Console.WriteLine(JsonConvert.SerializeObject(props));
-#endif
-		return JsonConvert.SerializeObject(props);
+		#if DEBUG
+		Console.WriteLine(JsonConvert.SerializeObject(_specification));
+		#endif
+		return JsonConvert.SerializeObject(_specification);
 	}
 }

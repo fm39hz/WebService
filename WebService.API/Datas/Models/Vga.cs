@@ -12,13 +12,13 @@ public record Vga : ISpecifications
 
 	public string GetSpec()
 	{
-		var props = new Dictionary<string, dynamic?>()
+		var _specification = new Dictionary<string, dynamic?>
 		{
-			{"Id", Id},
-			{"Brand", Brand},
-			{"Frequency", Frequency},
-			{"Vram", Vram}
+			{ "Id", Id },
+			{ "Brand", Brand },
+			{ "Frequency", Frequency },
+			{ "Vram", Vram }
 		};
-		return JsonConvert.SerializeObject(props);
+		return JsonConvert.SerializeObject(_specification);
 	}
 }
