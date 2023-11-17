@@ -13,7 +13,7 @@ public class Admin : User
 	{
 	}
 
-	private void GrantPermission(User user, Permission permission)
+	private static void GrantPermission(User user, Permission permission)
 	{
 		switch (permission)
 		{

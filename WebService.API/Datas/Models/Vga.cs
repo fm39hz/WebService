@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using WebService.API.VirtualBase;
 
 namespace WebService.API.Datas.Models;
@@ -8,4 +9,16 @@ public record Vga : ISpecifications
 	public int Vram { get; set; }
 	public required long Id { get; set; }
 	public string? Brand { get; set; }
+
+	public string GetSpec()
+	{
+		var props = new Dictionary<string, dynamic?>()
+		{
+			{"Id", Id},
+			{"Brand", Brand},
+			{"Frequency", Frequency},
+			{"Vram", Vram}
+		};
+		return JsonConvert.SerializeObject(props);
+	}
 }
