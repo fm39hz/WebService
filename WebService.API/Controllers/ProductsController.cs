@@ -48,22 +48,20 @@ public class ProductsController : ControllerBase
 
 	// PUT: api/Products/5
 	// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-	[HttpPut("{id:long}/{type:alpha}/{discount:int}")]
-	public async Task<IActionResult> Put(long id, Product product, string type, int discount)
+	[HttpPut("{id:long}/{type:alpha}")]
+	public async Task<IActionResult> Put(long id, Product product, string type)
 	{
 		if (id != product.Id)
 		{
 			return BadRequest();
 		}
-		var _item = new Product(
-			AbstractRedirect.GetPromote(discount),
-			AbstractRedirect.GetSpecifications(type, product.SpecId),
-			product.BasePrice)
-			{
-				Id = product.Id,
-				Name = product.Name,
-				Description = product.Description
-			};
+		var _item = new Product(AbstractRedirect.GetSpecifications(type, product.SpecId))
+		{
+			Id = product.Id,
+			Name = product.Name,
+			BasePrice = product.BasePrice,
+			Description = product.Description
+		};
 		_context.Entry(_item).State = EntityState.Modified;
 
 		try
