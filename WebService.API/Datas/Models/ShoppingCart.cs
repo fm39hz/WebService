@@ -1,6 +1,6 @@
 namespace WebService.API.Datas.Models;
 
-public class ShoppingCart
+public record ShoppingCart
 {
 	public required List<ShoppingItem> ShoppingItems { get; init; } = new();
 
