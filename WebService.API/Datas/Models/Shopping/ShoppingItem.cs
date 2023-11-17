@@ -1,6 +1,7 @@
+using WebService.API.Datas.Models.Products;
 using WebService.API.VirtualBase;
 
-namespace WebService.API.Datas.Models;
+namespace WebService.API.Datas.Models.Shopping;
 
 public record ShoppingItem(IEnumerable<IPromoteStrategy> AppliedPromoteStrategy)
 {

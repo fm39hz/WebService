@@ -1,4 +1,4 @@
-namespace WebService.API.Datas.Models;
+namespace WebService.API.Datas.Models.Shopping;
 
 public record ShoppingCart
 {

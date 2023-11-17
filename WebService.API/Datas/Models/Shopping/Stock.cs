@@ -1,4 +1,7 @@
-namespace WebService.API.Datas.Models;
+using WebService.API.Datas.Models.Products;
+using WebService.API.Datas.Models.Users;
+
+namespace WebService.API.Datas.Models.Shopping;
 
 public class Stock
 {
