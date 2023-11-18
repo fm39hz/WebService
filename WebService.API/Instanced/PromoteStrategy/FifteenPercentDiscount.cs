@@ -1,4 +1,4 @@
-using WebService.API.Datas.Models;
+using WebService.API.Datas.Models.Products;
 using WebService.API.VirtualBase;
 
 namespace WebService.API.Instanced.PromoteStrategy;
