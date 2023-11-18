@@ -6,7 +6,7 @@ namespace WebService.API.Controllers;
 
 public static class AbstractRedirect
 {
-	public static ISpecifications GetSpecifications(string type, long id)
+	public static Specifications GetSpecifications(string type, long id)
 	{
 		return type switch
 		{

@@ -3,17 +3,15 @@ using WebService.API.VirtualBase;
 
 namespace WebService.API.Datas.Models.Products;
 
-public record Cpu : ISpecifications
+public record Cpu : Specifications
 {
 	public string? Socket { get; set; }
 	public string? Voltage { get; set; }
 	public int Core { get; set; }
 	public int Thread { get; set; }
 	public double Frequency { get; set; }
-	public required long Id { get; set; }
-	public string? Brand { get; set; }
 
-	public string GetSpec()
+	public override string GetSpec()
 	{
 		var _specification = new Dictionary<string, dynamic?>()
 		{

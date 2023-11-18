@@ -2,7 +2,7 @@ using WebService.API.VirtualBase;
 
 namespace WebService.API.Datas.Models.Products;
 
-public record Product(ISpecifications Specifications)
+public record Product(Specifications Specifications)
 {
 	public required long Id { get; set; }
 	public string? Name { get; set; }
