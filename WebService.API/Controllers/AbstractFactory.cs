@@ -4,20 +4,14 @@ using WebService.API.VirtualBase;
 
 namespace WebService.API.Controllers;
 
-public static class AbstractRedirect
+public static class AbstractFactory
 {
-	public static Specifications GetSpecifications(string type, long id)
+	public static ISpecifications GetSpecifications(string type, long id)
 	{
 		return type switch
 		{
-			"cpu" => new Cpu
-			{
-				Id = id
-			},
-			"vga" => new Vga
-			{
-				Id = id
-			},
+			"cpu" => new Cpu(id),
+			"vga" => new Vga(id),
 			_ => throw new InvalidDataException()
 		};
 	}

@@ -3,12 +3,14 @@ using WebService.API.VirtualBase;
 
 namespace WebService.API.Datas.Models.Products;
 
-public record Vga : Specifications
+public record Vga(long Id) : ISpecifications
 {
 	public double Frequency { get; set; }
 	public int Vram { get; set; }
 
-	public override string GetSpec()
+	public string? Brand { get; set; }
+
+	public string GetSpec()
 	{
 		var _specification = new Dictionary<string, dynamic?>
 		{

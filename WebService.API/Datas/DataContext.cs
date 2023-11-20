@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using WebService.API.Datas.Models.Products;
+using WebService.API.Service;
 
 namespace WebService.API.Datas.Context;
 
@@ -21,7 +22,7 @@ public class DataContext : DbContext
 			typeBuilder.Property(e => e.Name);
 			typeBuilder.Property(e => e.Description);
 			typeBuilder.Property(e => e.BasePrice);
-			typeBuilder.Property(e => e.Specifications);
+			typeBuilder.Property(e => e.Specifications).HasConversion<SpecificationConverter>();
 		});
 	}
 }
