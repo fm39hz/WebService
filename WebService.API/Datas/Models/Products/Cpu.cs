@@ -3,8 +3,13 @@ using WebService.API.VirtualBase;
 
 namespace WebService.API.Datas.Models.Products;
 
-public record Cpu(long Id) : ISpecifications
+public record Cpu : Specifications
 {
+	public Cpu(long id) : base(id)
+	{
+		Type = "Vga";
+	}
+
 	public string? Socket { get; set; }
 	public string? Voltage { get; set; }
 	public int Core { get; set; }

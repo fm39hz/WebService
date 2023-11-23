@@ -3,11 +3,15 @@ using WebService.API.VirtualBase;
 
 namespace WebService.API.Datas.Models.Products;
 
-public record Vga(long Id) : ISpecifications
+public record Vga : Specifications
 {
+	public Vga(long id) : base(id)
+	{
+		Type = "vga";
+	}
+
 	public double Frequency { get; set; }
 	public int Vram { get; set; }
-
 	public string? Brand { get; set; }
 
 	public string GetSpec()

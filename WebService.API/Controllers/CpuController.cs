@@ -7,35 +7,35 @@ namespace WebService.API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class ProductsController : ControllerBase
+public class CpuController : ControllerBase
 {
 	private readonly DataContext _context;
 
-	public ProductsController(DataContext context)
+	public CpuController(DataContext context)
 	{
 		_context = context;
 	}
 
 	// GET: api/Products
 	[HttpGet]
-	public async Task<ActionResult<IEnumerable<Product>>> GetAll()
+	public async Task<ActionResult<IEnumerable<Cpu>>> GetAll()
 	{
 		if (!ProductExists(0))
 		{
 			return NotFound();
 		}
-		return await _context.Products.ToListAsync();
+		return await _context.Cpus.ToListAsync();
 	}
 
 	// GET: api/Products/5
 	[HttpGet("{id:long}")]
-	public async Task<ActionResult<Product>> Get(long id)
+	public async Task<ActionResult<Cpu>> Get(long id)
 	{
 		if (!ProductExists(id))
 		{
 			return NotFound();
 		}
-		var _item = await _context.Products.FindAsync(id);
+		var _item = await _context.Cpus.FindAsync(id);
 
 		if (_item == null)
 		{
@@ -48,18 +48,14 @@ public class ProductsController : ControllerBase
 
 	// PUT: api/Products/5
 	// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-	[HttpPut("{id:long}/")]
-	public async Task<IActionResult> Put(long id, Product product)
+	[HttpPut("{id:long}")]
+	public async Task<IActionResult> Put(long id, Cpu cpu)
 	{
-		if (id != product.Id)
+		if (id != cpu.Id)
 		{
 			return BadRequest();
 		}
-		var _item = product with
-		{
-			Specifications = AbstractFactory.GetSpecs(product.Specifications!.Id, _context)
-		};
-		_context.Entry(_item).State = EntityState.Modified;
+		_context.Entry(cpu).State = EntityState.Modified;
 
 		try
 		{
@@ -80,16 +76,16 @@ public class ProductsController : ControllerBase
 	// POST: api/Products
 	// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
 	[HttpPost]
-	public async Task<ActionResult<Product>> Post(Product product)
+	public async Task<ActionResult<Cpu>> Post(Cpu cpu)
 	{
-		if (_context.Products.Contains(product))
+		if (_context.Cpus.Contains(cpu))
 		{
 			return Problem("Product already exists");
 		}
-		_context.Products.Add(product);
+		_context.Cpus.Add(cpu);
 		await _context.SaveChangesAsync();
 
-		return CreatedAtAction("Get", new { id = product.Id }, product);
+		return CreatedAtAction("Get", new { id = cpu.Id }, cpu);
 	}
 
 	// DELETE: api/Products/5
@@ -100,13 +96,13 @@ public class ProductsController : ControllerBase
 		{
 			return NotFound();
 		}
-		var _item = await _context.Products.FindAsync(id);
+		var _item = await _context.Cpus.FindAsync(id);
 		if (_item == null)
 		{
 			return NotFound();
 		}
 
-		_context.Products.Remove(_item);
+		_context.Cpus.Remove(_item);
 		await _context.SaveChangesAsync();
 
 		return NoContent();
@@ -114,6 +110,6 @@ public class ProductsController : ControllerBase
 
 	private bool ProductExists(long id)
 	{
-		return _context.Products.Any(e => e.Id == id);
+		return _context.Cpus.Any(e => e.Id == id);
 	}
 }

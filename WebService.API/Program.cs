@@ -11,8 +11,7 @@ _builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(
 	optionsBuilder => optionsBuilder.EnableRetryOnFailure(
 		3,
 		TimeSpan.FromSeconds(5),
-		null)
-	));
+		null)));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 _builder.Services.AddEndpointsApiExplorer();

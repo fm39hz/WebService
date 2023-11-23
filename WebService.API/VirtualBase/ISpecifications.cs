@@ -1,9 +1,7 @@
 namespace WebService.API.VirtualBase;
 
-public interface ISpecifications
+public abstract record Specifications(long Id)
 {
-	public long Id { get; }
-	public string? Brand { get; set; }
-
-	public string GetSpec();
+	public long Id { get; set; } = Id;
+	public required string Type { get; set; }
 }

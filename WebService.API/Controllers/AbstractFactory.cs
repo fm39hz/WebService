@@ -1,3 +1,4 @@
+using WebService.API.Datas.Context;
 using WebService.API.Datas.Models.Products;
 using WebService.API.Instanced.PromoteStrategy;
 using WebService.API.VirtualBase;
@@ -6,12 +7,19 @@ namespace WebService.API.Controllers;
 
 public static class AbstractFactory
 {
-	public static ISpecifications GetSpecifications(string type, long id)
+	public static Specifications GetSpecs(long id, DataContext context)
 	{
-		return type switch
+		var _type = new SpecController(context).GetId(id).Result;
+		return _type.Value switch
 		{
-			"cpu" => new Cpu(id),
-			"vga" => new Vga(id),
+			"cpu" => new Cpu(id)
+			{
+				Type = "cpu"
+			},
+			"vga" => new Vga(id)
+			{
+				Type = "vga"
+			},
 			_ => throw new InvalidDataException()
 		};
 	}
