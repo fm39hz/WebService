@@ -3,13 +3,8 @@ using WebService.API.VirtualBase;
 
 namespace WebService.API.Datas.Models.Products;
 
-public record Cpu : Specifications
+public record Cpu : Specification
 {
-	public Cpu(long id) : base(id)
-	{
-		Type = "Vga";
-	}
-
 	public string? Socket { get; set; }
 	public string? Voltage { get; set; }
 	public int Core { get; set; }
@@ -18,9 +13,10 @@ public record Cpu : Specifications
 
 	public string? Brand { get; set; }
 
-	public string GetSpec()
+
+	public override string GetSpec()
 	{
-		var _specification = new Dictionary<string, dynamic?>()
+		var _specification = new Dictionary<string, dynamic?>
 		{
 			{ "Id", Id },
 			{ "Brand", Brand },

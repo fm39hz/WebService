@@ -24,7 +24,7 @@ public class SpecController : ControllerBase
 		}
 		var _item = await _context.Specifications.FindAsync(id);
 
-		return _item == null? NotFound() : _item.Type;
+		return _item == null? NotFound() : _item.GetSpec();
 	}
 
 	private bool SpecificationsExists(long id)
