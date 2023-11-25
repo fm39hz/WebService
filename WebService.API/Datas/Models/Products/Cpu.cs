@@ -11,7 +11,7 @@ public record Cpu : Specification
 	public int Thread { get; set; }
 	public double Frequency { get; set; }
 
-	public string? Brand { get; set; }
+	public string? Manufacturer { get; set; }
 
 
 	public override string GetSpec()
@@ -19,7 +19,7 @@ public record Cpu : Specification
 		var _specification = new Dictionary<string, dynamic?>
 		{
 			{ "Id", Id },
-			{ "Brand", Brand },
+			{ "Manufacturer", Manufacturer },
 			{ "Socket", Socket },
 			{ "Voltage", Voltage },
 			{ "Core", Core },

@@ -7,14 +7,14 @@ public record Vga : Specification
 {
 	public double Frequency { get; set; }
 	public int Vram { get; set; }
-	public string? Brand { get; set; }
+	public string? Manufacturer { get; set; }
 
 	public override string GetSpec()
 	{
 		var _specification = new Dictionary<string, dynamic?>
 		{
 			{ "Id", Id },
-			{ "Brand", Brand },
+			{ "Manufacturer", Manufacturer },
 			{ "Frequency", Frequency },
 			{ "Vram", Vram }
 		};
