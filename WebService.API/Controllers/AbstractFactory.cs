@@ -7,18 +7,20 @@ namespace WebService.API.Controllers;
 
 public static class AbstractFactory
 {
-	public static Specification GetSpecs(long id, DataContext context)
+	public static Specification GetSpecs(long id, Product target, DataContext context)
 	{
 		var _type = new SpecController(context).GetId(id).Result;
 		return _type.Value switch
 		{
 			"cpu" => new Cpu
 			{
-				Id = id
+				Id = id,
+				ProductTarget = target
 			},
 			"vga" => new Vga
 			{
-				Id = id
+				Id = id,
+				ProductTarget = target
 			},
 			_ => throw new InvalidDataException()
 		};

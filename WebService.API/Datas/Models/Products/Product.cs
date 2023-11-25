@@ -8,5 +8,5 @@ public record Product
 	public string? Name { get; set; }
 	public string? Description { get; set; }
 	public double BasePrice { get; set; }
-	public Specification? Specifications { get; set; }
+	public Specification? SpecificationInfo { get; set; }
 }

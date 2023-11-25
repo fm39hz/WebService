@@ -57,7 +57,7 @@ public class ProductsController : ControllerBase
 		}
 		var _item = product with
 		{
-			Specifications = AbstractFactory.GetSpecs(product.Specifications!.Id, _context)
+			SpecificationInfo = AbstractFactory.GetSpecs(product.SpecificationInfo!.Id, product, _context)
 		};
 		_context.Entry(_item).State = EntityState.Modified;
 
@@ -84,7 +84,7 @@ public class ProductsController : ControllerBase
 	{
 		if (_context.Products.Contains(product))
 		{
-			return Problem("Product already exists");
+			return Problem("ProductTarget already exists");
 		}
 		_context.Products.Add(product);
 		await _context.SaveChangesAsync();

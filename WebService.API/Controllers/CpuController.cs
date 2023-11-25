@@ -80,7 +80,7 @@ public class CpuController : ControllerBase
 	{
 		if (_context.Cpus.Contains(cpu))
 		{
-			return Problem("Product already exists");
+			return Problem("ProductTarget already exists");
 		}
 		_context.Cpus.Add(cpu);
 		await _context.SaveChangesAsync();
