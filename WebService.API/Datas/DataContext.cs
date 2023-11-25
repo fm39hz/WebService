@@ -18,8 +18,8 @@ public class DataContext : DbContext
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
 		modelBuilder.Entity<Specification>()
-		.HasOne(s => s.ProductTarget)
-		.WithOne(p => p.SpecificationInfo)
-		.HasForeignKey<Specification>(s => s.ProductId);
+		.HasOne(spec => spec.ProductTarget)
+		.WithOne(product => product.SpecificationInfo)
+		.HasForeignKey<Specification>(spec => spec.ProductId);
 	}
 }
