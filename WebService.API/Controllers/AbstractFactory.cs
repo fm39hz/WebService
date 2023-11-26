@@ -9,15 +9,14 @@ public static class AbstractFactory
 {
 	public static Specification GetSpecs(long id, Product target, DataContext context)
 	{
-		var _type = new SpecController(context).GetId(id).Result;
-		return _type.Value switch
+		return context.Products.Find(target.Id).SpecificationInfo.TableName switch
 		{
-			"cpu" => new Cpu
+			"Cpus" => new Cpu
 			{
 				Id = id,
 				ProductTarget = target
 			},
-			"vga" => new Vga
+			"Vgas" => new Vga
 			{
 				Id = id,
 				ProductTarget = target
