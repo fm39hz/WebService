@@ -20,10 +20,6 @@ public class ProductsController : ControllerBase
 	[HttpGet]
 	public async Task<ActionResult<IEnumerable<Product>>> GetAll()
 	{
-		if (!ProductExists(0))
-		{
-			return NotFound();
-		}
 		return await _context.Products.ToListAsync();
 	}
 
