@@ -5,6 +5,11 @@ namespace WebService.API.Datas.Models.Products;
 
 public record Cpu : Specification
 {
+	public Cpu()
+	{
+		TableName = "Cpus";
+	}
+
 	public string? Socket { get; set; }
 	public string? Voltage { get; set; }
 	public int Core { get; set; }

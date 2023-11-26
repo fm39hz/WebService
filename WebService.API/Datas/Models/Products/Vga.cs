@@ -5,6 +5,11 @@ namespace WebService.API.Datas.Models.Products;
 
 public record Vga : Specification
 {
+	public Vga()
+	{
+		TableName = "Vgas";
+	}
+
 	public double Frequency { get; set; }
 	public int Vram { get; set; }
 	public string? Manufacturer { get; set; }
