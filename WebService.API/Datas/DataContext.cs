@@ -11,7 +11,6 @@ public class DataContext : DbContext
 	}
 
 	public DbSet<Product> Products { get; set; } = null!;
-	public DbSet<Specification> Specifications { get; set; } = null!;
 	public DbSet<Vga> Vgas { get; set; } = null!;
 	public DbSet<Cpu> Cpus { get; set; } = null!;
 
@@ -21,14 +20,13 @@ public class DataContext : DbContext
 		.HasOne(spec => spec.ProductTarget)
 		.WithOne(product => product.SpecificationInfo)
 		.HasForeignKey<Specification>(spec => spec.ProductId);
+		modelBuilder.Entity<Specification>().HasKey(s => s.Id);
 		modelBuilder.Entity<Vga>().ToTable("Vgas");
-		modelBuilder.Entity<Vga>().HasKey(v => v.Id);
 		modelBuilder.Entity<Vga>().Property(v => v.Id).HasColumnName("Id");
 		modelBuilder.Entity<Vga>().Property(v => v.Manufacturer).HasColumnName("Manufacturer");
 		modelBuilder.Entity<Vga>().Property(v => v.Frequency).HasColumnName("Frequency");
 		modelBuilder.Entity<Vga>().Property(v => v.Vram).HasColumnName("Vram");
 		modelBuilder.Entity<Cpu>().ToTable("Cpus");
-		modelBuilder.Entity<Cpu>().HasKey(c => c.Id);
 		modelBuilder.Entity<Cpu>().Property(c => c.Id).HasColumnName("Id");
 		modelBuilder.Entity<Cpu>().Property(c => c.Manufacturer).HasColumnName("Manufacturer");
 		modelBuilder.Entity<Cpu>().Property(c => c.Socket).HasColumnName("Socket");
