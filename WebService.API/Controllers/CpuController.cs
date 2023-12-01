@@ -56,6 +56,7 @@ public class CpuController : ControllerBase
 		{
 			return BadRequest();
 		}
+
 		_context.Entry(cpu).State = EntityState.Modified;
 
 		try
@@ -71,7 +72,7 @@ public class CpuController : ControllerBase
 			throw;
 		}
 
-		return NoContent();
+		return Ok();
 	}
 
 	// POST: api/Products
