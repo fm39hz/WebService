@@ -29,8 +29,8 @@ public class CpuController : ControllerBase
 	}
 
 	// GET: api/Products/5
-	[HttpGet("{id:long}")]
-	public async Task<ActionResult<Cpu>> Get(long id)
+	[HttpGet("{id:int}")]
+	public async Task<ActionResult<Cpu>> Get(int id)
 	{
 		if (!ItemExists(id))
 		{
@@ -49,8 +49,8 @@ public class CpuController : ControllerBase
 
 	// PUT: api/Products/5
 	// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-	[HttpPut("{id:long}")]
-	public async Task<IActionResult> Put(long id, Cpu cpu)
+	[HttpPut("{id:int}")]
+	public async Task<IActionResult> Put(int id, Cpu cpu)
 	{
 		if (id != cpu.Id)
 		{
@@ -90,8 +90,8 @@ public class CpuController : ControllerBase
 	}
 
 	// DELETE: api/Products/5
-	[HttpDelete("{id:long}")]
-	public async Task<IActionResult> Delete(long id)
+	[HttpDelete("{id:int}")]
+	public async Task<IActionResult> Delete(int id)
 	{
 		if (!ItemExists(id))
 		{
@@ -109,7 +109,7 @@ public class CpuController : ControllerBase
 		return NoContent();
 	}
 
-	private bool ItemExists(long id)
+	private bool ItemExists(int id)
 	{
 		return _context.Cpus.Any(e => e.Id == id);
 	}

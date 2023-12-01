@@ -6,7 +6,7 @@ using WebService.API.Datas.Models.Products;
 
 namespace WebService.API.Controllers;
 
-[Route("api/Vgas")]
+[Route("api/[controller]")]
 [ApiController]
 public class VgaController : ControllerBase
 {

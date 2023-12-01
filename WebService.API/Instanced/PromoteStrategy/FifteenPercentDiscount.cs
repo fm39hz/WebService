@@ -14,7 +14,7 @@ public class FifteenPercentDiscount : IPromoteStrategy
 		return true;
 	}
 
-	public float DoDiscount(float basePrice)
+	public double DoDiscount(double basePrice)
 	{
 		return basePrice - basePrice * 15 / 100;
 	}

@@ -9,7 +9,7 @@ public class NoDiscount : IPromoteStrategy
 		get { return "Mức giá gốc của sản phẩm"; }
 	}
 
-	public float DoDiscount(float basePrice)
+	public double DoDiscount(double basePrice)
 	{
 		return basePrice;
 	}

@@ -9,7 +9,7 @@ public sealed record ShoppingItem(IEnumerable<IPromoteStrategy> AppliedPromoteSt
 	public required int Quantity { get; set; }
 	public bool IsSelected { get; set; }
 
-	public float GetFinalPrice()
+	public double GetFinalPrice()
 	{
 		return AppliedPromoteStrategy.Aggregate(Target.BasePrice,
 			(current, promote) => promote.CheckCondition(Target)? promote.DoDiscount(current) : Target.BasePrice);
