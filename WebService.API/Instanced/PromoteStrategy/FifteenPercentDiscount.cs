@@ -1,4 +1,3 @@
-using WebService.API.Datas.Models.Products;
 using WebService.API.VirtualBase;
 
 namespace WebService.API.Instanced.PromoteStrategy;
@@ -10,7 +9,7 @@ public class FifteenPercentDiscount : IPromoteStrategy
 		get { return "Giảm giá 15% cho tất cả các sản phẩm"; }
 	}
 
-	public bool CheckCondition(Product product)
+	public bool CheckCondition(IProduct product)
 	{
 		return true;
 	}

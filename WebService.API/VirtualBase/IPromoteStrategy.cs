@@ -1,5 +1,3 @@
-using WebService.API.Datas.Models.Products;
-
 namespace WebService.API.VirtualBase;
 
 public interface IPromoteStrategy
@@ -8,5 +6,5 @@ public interface IPromoteStrategy
 
 	public double DoDiscount(double basePrice);
 
-	public bool CheckCondition(Product product);
+	public bool CheckCondition(IProduct product);
 }

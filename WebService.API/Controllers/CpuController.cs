@@ -5,7 +5,7 @@ using WebService.API.Datas.Models.Products;
 
 namespace WebService.API.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/Cpus")]
 [ApiController]
 public class CpuController : ControllerBase
 {

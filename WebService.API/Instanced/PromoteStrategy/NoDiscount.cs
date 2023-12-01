@@ -1,4 +1,3 @@
-using WebService.API.Datas.Models.Products;
 using WebService.API.VirtualBase;
 
 namespace WebService.API.Instanced.PromoteStrategy;
@@ -15,7 +14,7 @@ public class NoDiscount : IPromoteStrategy
 		return basePrice;
 	}
 
-	public bool CheckCondition(Product product)
+	public bool CheckCondition(IProduct product)
 	{
 		return true;
 	}

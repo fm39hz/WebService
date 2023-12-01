@@ -1,5 +1,5 @@
-using WebService.API.Datas.Models.Products;
 using WebService.API.Datas.Models.Users;
+using WebService.API.VirtualBase;
 
 namespace WebService.API.Datas.Models.Shopping;
 
@@ -11,10 +11,9 @@ public class Stock
 	{
 	}
 
-	private List<Admin> Admins { get; } = new();
-	private List<Product> AvailableProducts { get; } = new();
+	private List<IProduct> AvailableProducts { get; } = new();
 
-	public static List<Product> GetProducts()
+	public static List<IProduct> GetProducts()
 	{
 		return Instance.AvailableProducts;
 	}
@@ -23,9 +22,9 @@ public class Stock
 	{
 	}
 
-	private static void AddProducts(Product product, Admin adminCredential)
+	private static void AddProducts(IProduct product, User adminCredential)
 	{
-		if (!Instance.Admins.Any(admin => admin == adminCredential && admin.CouldAddItem)) return;
+		if (!adminCredential.CouldAddItem) return;
 		Instance.AvailableProducts.Add(product);
 	}
 }
