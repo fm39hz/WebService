@@ -1,5 +1,3 @@
-using FirebaseAdmin;
-using Google.Apis.Auth.OAuth2;
 using Microsoft.EntityFrameworkCore;
 using WebService.API.Datas.Context;
 
@@ -27,15 +25,15 @@ if (_app.Environment.IsDevelopment())
 	_app.UseSwagger();
 	_app.UseSwaggerUI();
 }
-var _firebaseCredentials =
-	GoogleCredential.FromFile(
-		Directory.GetCurrentDirectory() +
-		"/FirebaseConfig/client_secret_62748980710-rgotd8v0p88pv9sq9rb3vhnkp4qneoj4.apps.googleusercontent.com.json");
-var firebaseApp = FirebaseApp.Create(new AppOptions
-{
-	Credential = _firebaseCredentials,
-	ProjectId = "62748980710-rgotd8v0p88pv9sq9rb3vhnkp4qneoj4.apps.googleusercontent.com"
-});
+// var _firebaseCredentials =
+// 	GoogleCredential.FromFile(
+// 		Directory.GetCurrentDirectory() +
+// 		"/FirebaseConfig/client_secret_62748980710-rgotd8v0p88pv9sq9rb3vhnkp4qneoj4.apps.googleusercontent.com.json");
+// var firebaseApp = FirebaseApp.Create(new AppOptions
+// {
+// 	Credential = _firebaseCredentials,
+// 	ProjectId = "62748980710-rgotd8v0p88pv9sq9rb3vhnkp4qneoj4.apps.googleusercontent.com"
+// });
 _app.UseHttpsRedirection();
 
 _app.UseAuthorization();
