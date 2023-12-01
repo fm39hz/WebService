@@ -4,7 +4,7 @@ public interface IPromoteStrategy
 {
 	public string Details { get; }
 
-	public double DoDiscount(double basePrice);
+	public float DoDiscount(float basePrice);
 
 	public bool CheckCondition(IProduct product);
 }

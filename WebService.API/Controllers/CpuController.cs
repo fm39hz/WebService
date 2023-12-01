@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using WebService.API.Datas.Context;
 using WebService.API.Datas.Models.Products;
 
@@ -20,7 +21,7 @@ public class CpuController : ControllerBase
 	[HttpGet]
 	public async Task<ActionResult<IEnumerable<Cpu>>> GetAll()
 	{
-		if (!ProductExists(0))
+		if (_context.Cpus.IsNullOrEmpty())
 		{
 			return NotFound();
 		}
