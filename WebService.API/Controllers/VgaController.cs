@@ -6,37 +6,37 @@ using WebService.API.Datas.Models.Products;
 
 namespace WebService.API.Controllers;
 
-[Route("api/Cpus")]
+[Route("api/Vgas")]
 [ApiController]
-public class CpuController : ControllerBase
+public class VgaController : ControllerBase
 {
 	private readonly DataContext _context;
 
-	public CpuController(DataContext context)
+	public VgaController(DataContext context)
 	{
 		_context = context;
 	}
 
 	// GET: api/Products
 	[HttpGet]
-	public async Task<ActionResult<IEnumerable<Cpu>>> GetAll()
+	public async Task<ActionResult<IEnumerable<Vga>>> GetAll()
 	{
-		if (_context.Cpus.IsNullOrEmpty())
+		if (_context.Vgas.IsNullOrEmpty())
 		{
 			return NotFound();
 		}
-		return await _context.Cpus.ToListAsync();
+		return await _context.Vgas.ToListAsync();
 	}
 
 	// GET: api/Products/5
 	[HttpGet("{id:long}")]
-	public async Task<ActionResult<Cpu>> Get(long id)
+	public async Task<ActionResult<Vga>> Get(long id)
 	{
 		if (!ItemExists(id))
 		{
 			return NotFound();
 		}
-		var _item = await _context.Cpus.FindAsync(id);
+		var _item = await _context.Vgas.FindAsync(id);
 
 		if (_item == null)
 		{
@@ -77,16 +77,16 @@ public class CpuController : ControllerBase
 	// POST: api/Products
 	// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
 	[HttpPost]
-	public async Task<ActionResult<Cpu>> Post(Cpu cpu)
+	public async Task<ActionResult<Vga>> Post(Vga vga)
 	{
-		if (ItemExists(cpu.Id))
+		if (ItemExists(vga.Id))
 		{
 			return Problem("Cpu already exists");
 		}
-		_context.Cpus.Add(cpu);
+		_context.Vgas.Add(vga);
 		await _context.SaveChangesAsync();
 
-		return CreatedAtAction("Get", new { id = cpu.Id }, cpu);
+		return CreatedAtAction("Get", new { id = vga.Id }, vga);
 	}
 
 	// DELETE: api/Products/5
@@ -97,13 +97,13 @@ public class CpuController : ControllerBase
 		{
 			return NotFound();
 		}
-		var _item = await _context.Cpus.FindAsync(id);
+		var _item = await _context.Vgas.FindAsync(id);
 		if (_item == null)
 		{
 			return NotFound();
 		}
 
-		_context.Cpus.Remove(_item);
+		_context.Vgas.Remove(_item);
 		await _context.SaveChangesAsync();
 
 		return NoContent();
@@ -111,6 +111,6 @@ public class CpuController : ControllerBase
 
 	private bool ItemExists(long id)
 	{
-		return _context.Cpus.Any(e => e.Id == id);
+		return _context.Vgas.Any(e => e.Id == id);
 	}
 }
