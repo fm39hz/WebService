@@ -1,4 +1,4 @@
-namespace WebService.API.VirtualBase;
+namespace WebService.API.Service.Firebase;
 
 public sealed record SignInCredential
 {

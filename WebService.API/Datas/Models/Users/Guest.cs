@@ -1,5 +1,5 @@
 using WebService.API.Datas.Models.Shopping;
-using WebService.API.VirtualBase;
+using WebService.API.Service.Firebase;
 
 namespace WebService.API.Datas.Models.Users;
 
