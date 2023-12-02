@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using WebService.API.Datas.Context;
 using WebService.API.Datas.Models.Products;
+using WebService.API.Service;
 
 namespace WebService.API.Controllers;
 
@@ -25,5 +26,10 @@ public class StockController : ControllerBase
 			return NotFound();
 		}
 		return await _context.Stock.ToListAsync();
+	}
+
+	private bool ItemExists(int id)
+	{
+		return _context.Stock.ItemExists(id);
 	}
 }

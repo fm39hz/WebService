@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using WebService.API.Datas.Context;
 using WebService.API.Datas.Models.Products;
+using WebService.API.Service;
 
 namespace WebService.API.Controllers;
 
@@ -112,6 +113,6 @@ public class CpuController : ControllerBase
 
 	private bool ItemExists(int id)
 	{
-		return _context.Cpus.Any(e => e.Id == id);
+		return _context.Cpus.ItemExists(id);
 	}
 }
