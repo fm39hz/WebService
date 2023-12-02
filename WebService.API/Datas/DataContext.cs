@@ -17,8 +17,8 @@ public class DataContext : DbContext
 	{
 		base.OnModelCreating(modelBuilder);
 		modelBuilder.Entity<ProductSet>().HasOne<Cpu>().WithOne()
-		.HasForeignKey<ProductSet>(product => product.ProductId);
+		.HasForeignKey<ProductSet>(set => set.ProductId);
 		modelBuilder.Entity<ProductSet>().HasOne<Vga>().WithOne()
-		.HasForeignKey<Vga>(product => product.Id);
+		.HasForeignKey<ProductSet>(set => set.ProductId);
 	}
 }
