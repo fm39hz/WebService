@@ -1,4 +1,5 @@
-using WebService.API.VirtualBase;
+using WebService.API.VirtualBase.Abstract;
+using WebService.API.VirtualBase.Interface;
 
 namespace WebService.API.Datas.Models.Shopping;
 

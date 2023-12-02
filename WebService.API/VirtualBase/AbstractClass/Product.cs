@@ -1,4 +1,4 @@
-namespace WebService.API.VirtualBase;
+namespace WebService.API.VirtualBase.Abstract;
 
 public abstract record Product
 {
