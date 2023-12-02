@@ -30,7 +30,7 @@ if (_app.Environment.IsDevelopment())
 var _firebaseCredentials =
 	GoogleCredential.FromFile(
 		Directory.GetCurrentDirectory() +
-		"/Service/Firebase/Config/webservice-eeaaa-firebase-adminsdk-25j7s-2f07f228d8.json");
+		"/Service/Firebase/webservice-eeaaa-firebase-adminsdk-25j7s-2f07f228d8.json");
 var firebaseApp = FirebaseApp.Create(new AppOptions
 {
 	Credential = _firebaseCredentials,
