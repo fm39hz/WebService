@@ -14,7 +14,7 @@ public class NoDiscount : IPromoteStrategy
 		return basePrice;
 	}
 
-	public bool CheckCondition(IProduct product)
+	public bool CheckCondition(Product product)
 	{
 		return true;
 	}

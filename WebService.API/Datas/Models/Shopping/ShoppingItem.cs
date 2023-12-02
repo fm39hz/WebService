@@ -2,10 +2,10 @@ using WebService.API.VirtualBase;
 
 namespace WebService.API.Datas.Models.Shopping;
 
-public sealed record ShoppingItem(IEnumerable<IPromoteStrategy> AppliedPromoteStrategy, IProduct Target)
+public sealed record ShoppingItem(IEnumerable<IPromoteStrategy> AppliedPromoteStrategy, Product Target)
 {
 	public required long Id { get; set; }
-	public required IProduct Target { get; init; } = Target;
+	public required Product Target { get; init; } = Target;
 	public required int Quantity { get; set; }
 	public bool IsSelected { get; set; }
 

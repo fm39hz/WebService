@@ -6,5 +6,5 @@ public interface IPromoteStrategy
 
 	public double DoDiscount(double basePrice);
 
-	public bool CheckCondition(IProduct product);
+	public bool CheckCondition(Product product);
 }

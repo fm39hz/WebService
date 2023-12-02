@@ -1,6 +1,6 @@
 namespace WebService.API.VirtualBase;
 
-public interface IProduct
+public abstract record Product
 {
 	public int Id { get; set; }
 	public string? Name { get; set; }

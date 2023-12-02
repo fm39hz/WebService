@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using WebService.API.Datas.Context;
-using WebService.API.VirtualBase;
+using WebService.API.Datas.Models.Products;
 
 namespace WebService.API.Controllers;
 
@@ -18,7 +18,7 @@ public class StockController : ControllerBase
 	}
 
 	[HttpGet]
-	public async Task<ActionResult<IEnumerable<Dictionary<IProduct, int>>>> GetAll()
+	public async Task<ActionResult<IEnumerable<ProductSet>>> GetAll()
 	{
 		if ((await _context.Stock.ToListAsync()).IsNullOrEmpty())
 		{

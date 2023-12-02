@@ -9,7 +9,7 @@ public class FifteenPercentDiscount : IPromoteStrategy
 		get { return "Giảm giá 15% cho tất cả các sản phẩm"; }
 	}
 
-	public bool CheckCondition(IProduct product)
+	public bool CheckCondition(Product product)
 	{
 		return true;
 	}
