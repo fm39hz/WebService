@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using WebService.API.Datas.Context;
 using WebService.API.Datas.Models.Products;
+using WebService.API.Service;
 
 namespace WebService.API.Controllers;
 
@@ -29,8 +30,8 @@ public class VgaController : ControllerBase
 	}
 
 	// GET: api/Products/5
-	[HttpGet("{id:long}")]
-	public async Task<ActionResult<Vga>> Get(long id)
+	[HttpGet("{id:int}")]
+	public async Task<ActionResult<Vga>> Get(int id)
 	{
 		if (!ItemExists(id))
 		{
@@ -49,8 +50,8 @@ public class VgaController : ControllerBase
 
 	// PUT: api/Products/5
 	// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-	[HttpPut("{id:long}")]
-	public async Task<IActionResult> Put(long id, Cpu cpu)
+	[HttpPut("{id:int}")]
+	public async Task<IActionResult> Put(int id, Cpu cpu)
 	{
 		if (id != cpu.Id)
 		{
@@ -90,8 +91,8 @@ public class VgaController : ControllerBase
 	}
 
 	// DELETE: api/Products/5
-	[HttpDelete("{id:long}")]
-	public async Task<IActionResult> Delete(long id)
+	[HttpDelete("{id:int}")]
+	public async Task<IActionResult> Delete(int id)
 	{
 		if (!ItemExists(id))
 		{
@@ -109,8 +110,8 @@ public class VgaController : ControllerBase
 		return NoContent();
 	}
 
-	private bool ItemExists(long id)
+	private bool ItemExists(int id)
 	{
-		return _context.Vgas.Any(e => e.Id == id);
+		return _context.Vgas.ItemExists(id);
 	}
 }
