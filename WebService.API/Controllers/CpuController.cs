@@ -33,13 +33,8 @@ public class CpuController : ControllerBase
 	[HttpGet("{id:int}")]
 	public async Task<ActionResult<Cpu>> Get(int id)
 	{
-		if (!ItemExists(id))
-		{
-			return NotFound();
-		}
 		var _item = await _context.Cpus.FindAsync(id);
-
-		if (_item == null)
+		if (!ItemExists(id) || _item == null)
 		{
 			return NotFound();
 		}
@@ -85,6 +80,7 @@ public class CpuController : ControllerBase
 		{
 			return Problem("Cpu already exists");
 		}
+		_context.EnsureProductsExists(cpu);
 		_context.Cpus.Add(cpu);
 		await _context.SaveChangesAsync();
 
