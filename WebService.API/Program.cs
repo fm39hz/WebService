@@ -19,6 +19,17 @@ _builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(
 _builder.Services.AddEndpointsApiExplorer();
 _builder.Services.AddSwaggerGen();
 
+var _firebaseCredentials =
+	GoogleCredential.FromFile(
+		Directory.GetCurrentDirectory() +
+		"/Service/Firebase/webservice-eeaaa-firebase-adminsdk-25j7s-2f07f228d8.json");
+var _firebaseApp = FirebaseApp.Create(new AppOptions
+{
+	Credential = _firebaseCredentials,
+	ProjectId = "1:350339673774:web:ad803bae26f55267a8c73f"
+});
+_builder.Services.AddSingleton(_firebaseApp);
+
 var _app = _builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -28,15 +39,6 @@ if (_app.Environment.IsDevelopment())
 	_app.UseSwaggerUI();
 }
 
-var _firebaseCredentials =
-	GoogleCredential.FromFile(
-		Directory.GetCurrentDirectory() +
-		"/Service/Firebase/webservice-eeaaa-firebase-adminsdk-25j7s-2f07f228d8.json");
-var firebaseApp = FirebaseApp.Create(new AppOptions
-{
-	Credential = _firebaseCredentials,
-	ProjectId = "1:350339673774:web:ad803bae26f55267a8c73f"
-});
 
 _app.UseHttpsRedirection();
 
