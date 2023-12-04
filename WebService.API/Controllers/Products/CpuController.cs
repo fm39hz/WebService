@@ -48,17 +48,8 @@ public class CpuController : ControllerBase
 	[HttpPut("{id:int}")]
 	public async Task<IActionResult> Put(int id, Cpu cpu)
 	{
-		var _cpu = (await Get(id)).Value!;
-		if (_cpu.Id != id)
-		{
-			return BadRequest();
-		}
-		if (_cpu.Id != cpu.Id)
-		{
-			cpu.Id = _cpu.Id;
-		}
+		cpu.Id = id;
 		_context.Entry(cpu).State = EntityState.Modified;
-
 		try
 		{
 			await _context.SaveChangesAsync();

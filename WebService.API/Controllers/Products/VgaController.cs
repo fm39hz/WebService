@@ -53,15 +53,7 @@ public class VgaController : ControllerBase
 	[HttpPut("{id:int}")]
 	public async Task<IActionResult> Put(int id, Vga vga)
 	{
-		var _vga = (await Get(id)).Value!;
-		if (_vga.Id != id)
-		{
-			return BadRequest();
-		}
-		if (_vga.Id != vga.Id)
-		{
-			vga.Id = _vga.Id;
-		}
+		vga.Id = id;
 		_context.Entry(vga).State = EntityState.Modified;
 
 		try

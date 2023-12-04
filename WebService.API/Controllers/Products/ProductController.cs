@@ -46,12 +46,7 @@ public class ProductController : ControllerBase
 	{
 		var _item = (await Get(id)).Value!;
 		_item.Quantity = product.Quantity;
-		if (_item.Id != id)
-		{
-			return BadRequest();
-		}
 		_context.Entry(_item).State = EntityState.Modified;
-
 		try
 		{
 			await _context.SaveChangesAsync();
