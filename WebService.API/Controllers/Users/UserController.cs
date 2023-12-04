@@ -15,9 +15,10 @@ public class UserController : ControllerBase
 		_authService = FirebaseAuth.GetAuth(firebaseApp);
 	}
 
-	[HttpGet("{id:alpha}")]
-	public async Task<UserRecord> Get(string id)
+	[HttpGet("{id}")]
+	public async Task<ActionResult<UserRecord>> Get(string id)
 	{
-		return await _authService.GetUserAsync(id);
+		var _userRecord = await _authService.GetUserAsync(id);
+		return _userRecord;
 	}
 }
