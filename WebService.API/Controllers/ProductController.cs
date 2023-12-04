@@ -40,19 +40,31 @@ public class ProductController : ControllerBase
 		return _item;
 	}
 
-	[HttpPost]
-	public async Task<ActionResult<ProductSet>> Post(ProductSet product)
+	[HttpPut("{id:int}")]
+	public async Task<IActionResult> Put(int id, ProductSet product)
 	{
-		if (ItemExists(product.Id))
+		var _item = (await Get(id)).Value!;
+		_item.Quantity = product.Quantity;
+		if (_item.Id != id)
 		{
-			return Problem("Product already exists");
+			return BadRequest();
 		}
-		_context.Products.Add(product);
-		await _context.SaveChangesAsync();
+		_context.Entry(_item).State = EntityState.Modified;
 
-		return CreatedAtAction("Get", new { id = product.Id }, product);
+		try
+		{
+			await _context.SaveChangesAsync();
+		}
+		catch (DbUpdateConcurrencyException)
+		{
+			if (!ItemExists(id))
+			{
+				return NotFound();
+			}
+			throw;
+		}
+		return Ok();
 	}
-
 
 	private bool ItemExists(int id)
 	{
