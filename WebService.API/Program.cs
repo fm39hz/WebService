@@ -30,7 +30,7 @@ _builder.Services.AddSingleton(FirebaseApp.Create(new AppOptions
 	Credential = GoogleCredential.FromFile(
 		Directory.GetCurrentDirectory() +
 		"/Service/Firebase/webservice-eeaaa-firebase-adminsdk-25j7s-2f07f228d8.json"),
-	ProjectId = "1:350339673774:web:ad803bae26f55267a8c73f"
+	ProjectId = "webservice-eeaaa"
 }));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
