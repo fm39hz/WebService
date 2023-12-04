@@ -27,6 +27,7 @@ if (_app.Environment.IsDevelopment())
 	_app.UseSwagger();
 	_app.UseSwaggerUI();
 }
+
 var _firebaseCredentials =
 	GoogleCredential.FromFile(
 		Directory.GetCurrentDirectory() +
@@ -36,6 +37,7 @@ var firebaseApp = FirebaseApp.Create(new AppOptions
 	Credential = _firebaseCredentials,
 	ProjectId = "1:350339673774:web:ad803bae26f55267a8c73f"
 });
+
 _app.UseHttpsRedirection();
 
 _app.UseAuthorization();
