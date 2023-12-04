@@ -18,7 +18,7 @@ public class CpuController : ControllerBase
 		_context = context;
 	}
 
-	// GET: api/Products
+	// GET: api/Cpus
 	[HttpGet]
 	public async Task<ActionResult<IEnumerable<Cpu>>> GetAll()
 	{
@@ -29,7 +29,7 @@ public class CpuController : ControllerBase
 		return await _context.Cpus.ToListAsync();
 	}
 
-	// GET: api/Products/5
+	// GET: api/Cpus/0
 	[HttpGet("{id:int}")]
 	public async Task<ActionResult<Cpu>> Get(int id)
 	{
@@ -43,7 +43,7 @@ public class CpuController : ControllerBase
 	}
 
 
-	// PUT: api/Products/5
+	// PUT: api/Cpus/0
 	// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
 	[HttpPut("{id:int}")]
 	public async Task<IActionResult> Put(int id, Cpu cpu)
@@ -75,7 +75,7 @@ public class CpuController : ControllerBase
 		return Ok();
 	}
 
-	// POST: api/Products
+	// POST: api/Cpus
 	// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
 	[HttpPost]
 	public async Task<ActionResult<Cpu>> Post(Cpu cpu)
@@ -91,7 +91,7 @@ public class CpuController : ControllerBase
 		return CreatedAtAction("Get", new { id = cpu.Id }, cpu);
 	}
 
-	// DELETE: api/Products/5
+	// DELETE: api/Cpus/0
 	[HttpDelete("{id:int}")]
 	public async Task<IActionResult> Delete(int id)
 	{

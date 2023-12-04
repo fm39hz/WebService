@@ -7,7 +7,7 @@ using WebService.API.Service;
 
 namespace WebService.API.Controllers.Products;
 
-[Route("api/[controller]")]
+[Route("api/Vgas")]
 [ApiController]
 public class VgaController : ControllerBase
 {
@@ -18,7 +18,7 @@ public class VgaController : ControllerBase
 		_context = context;
 	}
 
-	// GET: api/Products
+	// GET: api/Vgas
 	[HttpGet]
 	public async Task<ActionResult<IEnumerable<Vga>>> GetAll()
 	{
@@ -29,7 +29,7 @@ public class VgaController : ControllerBase
 		return await _context.Vgas.ToListAsync();
 	}
 
-	// GET: api/Products/5
+	// GET: api/Vgas/0
 	[HttpGet("{id:int}")]
 	public async Task<ActionResult<Vga>> Get(int id)
 	{
@@ -48,7 +48,7 @@ public class VgaController : ControllerBase
 	}
 
 
-	// PUT: api/Products/5
+	// PUT: api/Vgas/5
 	// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
 	[HttpPut("{id:int}")]
 	public async Task<IActionResult> Put(int id, Vga vga)
@@ -80,7 +80,7 @@ public class VgaController : ControllerBase
 		return NoContent();
 	}
 
-	// POST: api/Products
+	// POST: api/Vgas
 	// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
 	[HttpPost]
 	public async Task<ActionResult<Vga>> Post(Vga vga)
@@ -96,7 +96,7 @@ public class VgaController : ControllerBase
 		return CreatedAtAction("Get", new { id = vga.Id }, vga);
 	}
 
-	// DELETE: api/Products/5
+	// DELETE: api/Vgas/5
 	[HttpDelete("{id:int}")]
 	public async Task<IActionResult> Delete(int id)
 	{
