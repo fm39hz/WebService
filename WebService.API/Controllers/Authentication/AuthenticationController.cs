@@ -15,23 +15,25 @@ public class AuthenticationController : ControllerBase
 		_authClient = autchClient;
 	}
 
-	[HttpPost("signup")]
+	[HttpPost("Signup")]
 	public async Task<ActionResult<string>> SignUp(LoginParam param)
 	{
 		var _userCredentials = await _authClient.CreateUserWithEmailAndPasswordAsync(param.Email, param.Password);
 		return _userCredentials is null
-			? Problem("Login Failed, please check your information")
+			? Problem("Cannot Create User, please check your information")
 			: await _userCredentials.User.GetIdTokenAsync();
 	}
 
-	[HttpPost("login")]
+	[HttpPost("Login")]
 	public async Task<ActionResult<string>> LogIn(LoginParam param)
 	{
 		var _userCredentials = await _authClient.SignInWithEmailAndPasswordAsync(param.Email, param.Password);
-		return _userCredentials is null? NoContent() : await _userCredentials.User.GetIdTokenAsync();
+		return _userCredentials is null
+			? Problem("Cannot Login, please check your information")
+			: await _userCredentials.User.GetIdTokenAsync();
 	}
 
-	[HttpPost("logout")]
+	[HttpPost("Logout")]
 	public void LogOut()
 	{
 		_authClient.SignOut();
