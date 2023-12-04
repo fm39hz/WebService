@@ -9,16 +9,11 @@ public class DataContext : DbContext
 	{
 	}
 
-	public DbSet<ProductSet> Stock { get; set; } = null!;
+	public DbSet<ProductSet> Products { get; set; } = null!;
 	public DbSet<Vga> Vgas { get; set; } = null!;
 	public DbSet<Cpu> Cpus { get; set; } = null!;
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
-		base.OnModelCreating(modelBuilder);
-		modelBuilder.Entity<ProductSet>().HasOne<Cpu>().WithOne()
-		.HasForeignKey<ProductSet>(set => set.ProductId);
-		modelBuilder.Entity<ProductSet>().HasOne<Vga>().WithOne()
-		.HasForeignKey<ProductSet>(set => set.ProductId);
 	}
 }
