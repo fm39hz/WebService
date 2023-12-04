@@ -7,35 +7,36 @@ using WebService.API.Datas.Context;
 
 var _builder = WebApplication.CreateBuilder(args);
 
+var _service = _builder.Services;
+var _configuration = _builder.Configuration;
 // Add services to the container.
-
-_builder.Services.AddControllers();
-_builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(
-	_builder.Configuration.GetConnectionString("DataContext"),
+_service.AddControllers();
+_service.AddDbContext<DataContext>(options => options.UseSqlServer(
+	_configuration.GetConnectionString("DataContext"),
 	optionsBuilder => optionsBuilder.EnableRetryOnFailure(
 		3,
 		TimeSpan.FromSeconds(5),
 		null)));
-_builder.Services.AddSingleton(new FirebaseAuthClient(new FirebaseAuthConfig
+_service.AddSingleton(new FirebaseAuthClient(new FirebaseAuthConfig
 {
-	ApiKey = "AIzaSyCrHSc5RMJHaLxxJPRElqG8kri-NcflwXE",
-	AuthDomain = "webservice-eeaaa.firebaseapp.com",
+	ApiKey = _configuration.GetValue<string>("ApiKey"),
+	AuthDomain = _configuration.GetValue<string>("AuthDomain"),
 	Providers = new FirebaseAuthProvider[]
 	{
 		new EmailProvider()
 	}
 }));
-_builder.Services.AddSingleton(FirebaseApp.Create(new AppOptions
+_service.AddSingleton(FirebaseApp.Create(new AppOptions
 {
 	Credential = GoogleCredential.FromFile(
 		Directory.GetCurrentDirectory() +
-		"/Service/Firebase/webservice-eeaaa-firebase-adminsdk-25j7s-2f07f228d8.json"),
-	ProjectId = "webservice-eeaaa"
+		_configuration.GetValue<string>("CredentialFile")),
+	ProjectId = _configuration.GetValue<string>("ProjectId")
 }));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-_builder.Services.AddEndpointsApiExplorer();
-_builder.Services.AddSwaggerGen();
+_service.AddEndpointsApiExplorer();
+_service.AddSwaggerGen();
 
 
 var _app = _builder.Build();
