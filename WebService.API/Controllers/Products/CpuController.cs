@@ -5,7 +5,7 @@ using WebService.API.Datas.Context;
 using WebService.API.Datas.Models.Products;
 using WebService.API.Service;
 
-namespace WebService.API.Controllers;
+namespace WebService.API.Controllers.Products;
 
 [Route("api/Cpus")]
 [ApiController]
