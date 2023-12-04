@@ -15,20 +15,18 @@ _builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(
 		TimeSpan.FromSeconds(5),
 		null)));
 
+_builder.Services.AddSingleton(FirebaseApp.Create(new AppOptions
+{
+	Credential = GoogleCredential.FromFile(
+		Directory.GetCurrentDirectory() +
+		"/Service/Firebase/webservice-eeaaa-firebase-adminsdk-25j7s-2f07f228d8.json"),
+	ProjectId = "1:350339673774:web:ad803bae26f55267a8c73f"
+}));
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 _builder.Services.AddEndpointsApiExplorer();
 _builder.Services.AddSwaggerGen();
 
-var _firebaseCredentials =
-	GoogleCredential.FromFile(
-		Directory.GetCurrentDirectory() +
-		"/Service/Firebase/webservice-eeaaa-firebase-adminsdk-25j7s-2f07f228d8.json");
-var _firebaseApp = FirebaseApp.Create(new AppOptions
-{
-	Credential = _firebaseCredentials,
-	ProjectId = "1:350339673774:web:ad803bae26f55267a8c73f"
-});
-_builder.Services.AddSingleton(_firebaseApp);
 
 var _app = _builder.Build();
 
