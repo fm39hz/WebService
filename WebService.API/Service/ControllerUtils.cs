@@ -9,15 +9,15 @@ public static class ControllerUtils
 	/// <summary>
 	/// Make sure that Products is exist, if not it will create new item to db
 	/// </summary>
-	/// <param name="context"></param>
-	/// <param name="model"></param>
-	public static void EnsureProductsExists(this DataContext context, Product model)
+	/// <param name="context">Context that has DbSet for ProductSet</param>
+	/// <param name="product">the product that relate to ProductSet</param>
+	public static void EnsureProductsExists(this DataContext context, Product product)
 	{
-		if (!context.Products.Any(a => a.ProductId == model.Id))
+		if (!context.Products.Any(a => a.ProductId == product.Id))
 		{
 			context.Products.Add(new ProductSet
 			{
-				ProductId = model.Id
+				ProductId = product.Id
 			});
 		}
 	}
