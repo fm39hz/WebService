@@ -18,7 +18,6 @@ public class UserController : ControllerBase
 	[HttpGet("{id}")]
 	public async Task<ActionResult<UserRecord>> Get(string id)
 	{
-		var _userRecord = await _authService.GetUserAsync(id);
-		return _userRecord;
+		return await _authService.GetUserAsync(id);
 	}
 }
