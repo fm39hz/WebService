@@ -1,3 +1,5 @@
+using Firebase.Auth;
+using Firebase.Auth.Providers;
 using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
 using Microsoft.EntityFrameworkCore;
@@ -14,7 +16,15 @@ _builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(
 		3,
 		TimeSpan.FromSeconds(5),
 		null)));
-
+_builder.Services.AddSingleton(new FirebaseAuthClient(new FirebaseAuthConfig
+{
+	ApiKey = "AIzaSyCrHSc5RMJHaLxxJPRElqG8kri-NcflwXE",
+	AuthDomain = "webservice-eeaaa.firebaseapp.com",
+	Providers = new FirebaseAuthProvider[]
+	{
+		new EmailProvider()
+	}
+}));
 _builder.Services.AddSingleton(FirebaseApp.Create(new AppOptions
 {
 	Credential = GoogleCredential.FromFile(
