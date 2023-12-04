@@ -5,41 +5,36 @@ using WebService.API.Datas.Context;
 using WebService.API.Datas.Models.Products;
 using WebService.API.Service;
 
-namespace WebService.API.Controllers;
+namespace WebService.API.Controllers.Products;
 
-[Route("api/[controller]")]
+[Route("api/Cpus")]
 [ApiController]
-public class VgaController : ControllerBase
+public class CpuController : ControllerBase
 {
 	private readonly DataContext _context;
 
-	public VgaController(DataContext context)
+	public CpuController(DataContext context)
 	{
 		_context = context;
 	}
 
-	// GET: api/Products
+	// GET: api/Cpus
 	[HttpGet]
-	public async Task<ActionResult<IEnumerable<Vga>>> GetAll()
+	public async Task<ActionResult<IEnumerable<Cpu>>> GetAll()
 	{
-		if (_context.Vgas.IsNullOrEmpty())
+		if (_context.Cpus.IsNullOrEmpty())
 		{
 			return NotFound();
 		}
-		return await _context.Vgas.ToListAsync();
+		return await _context.Cpus.ToListAsync();
 	}
 
-	// GET: api/Products/5
+	// GET: api/Cpus/0
 	[HttpGet("{id:int}")]
-	public async Task<ActionResult<Vga>> Get(int id)
+	public async Task<ActionResult<Cpu>> Get(int id)
 	{
-		if (!ItemExists(id))
-		{
-			return NotFound();
-		}
-		var _item = await _context.Vgas.FindAsync(id);
-
-		if (_item == null)
+		var _item = await _context.Cpus.FindAsync(id);
+		if (!ItemExists(id) || _item == null)
 		{
 			return NotFound();
 		}
@@ -48,17 +43,13 @@ public class VgaController : ControllerBase
 	}
 
 
-	// PUT: api/Products/5
+	// PUT: api/Cpus/0
 	// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
 	[HttpPut("{id:int}")]
 	public async Task<IActionResult> Put(int id, Cpu cpu)
 	{
-		if (id != cpu.Id)
-		{
-			return BadRequest();
-		}
-		_context.Entry(cpu).State = EntityState.Modified;
-
+		cpu.Id = id;
+		_context.Update(cpu);
 		try
 		{
 			await _context.SaveChangesAsync();
@@ -72,25 +63,26 @@ public class VgaController : ControllerBase
 			throw;
 		}
 
-		return NoContent();
+		return Ok();
 	}
 
-	// POST: api/Products
+	// POST: api/Cpus
 	// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
 	[HttpPost]
-	public async Task<ActionResult<Vga>> Post(Vga vga)
+	public async Task<ActionResult<Cpu>> Post(Cpu cpu)
 	{
-		if (ItemExists(vga.Id))
+		if (ItemExists(cpu.Id))
 		{
 			return Problem("Cpu already exists");
 		}
-		_context.Vgas.Add(vga);
+		_context.EnsureProductsExists(cpu);
+		_context.Cpus.Add(cpu);
 		await _context.SaveChangesAsync();
 
-		return CreatedAtAction("Get", new { id = vga.Id }, vga);
+		return CreatedAtAction("Get", new { id = cpu.Id }, cpu);
 	}
 
-	// DELETE: api/Products/5
+	// DELETE: api/Cpus/0
 	[HttpDelete("{id:int}")]
 	public async Task<IActionResult> Delete(int id)
 	{
@@ -98,13 +90,13 @@ public class VgaController : ControllerBase
 		{
 			return NotFound();
 		}
-		var _item = await _context.Vgas.FindAsync(id);
+		var _item = await _context.Cpus.FindAsync(id);
 		if (_item == null)
 		{
 			return NotFound();
 		}
 
-		_context.Vgas.Remove(_item);
+		_context.Cpus.Remove(_item);
 		await _context.SaveChangesAsync();
 
 		return NoContent();
@@ -112,6 +104,6 @@ public class VgaController : ControllerBase
 
 	private bool ItemExists(int id)
 	{
-		return _context.Vgas.ItemExists(id);
+		return _context.Cpus.ItemExists(id);
 	}
 }
