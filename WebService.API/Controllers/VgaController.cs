@@ -51,13 +51,18 @@ public class VgaController : ControllerBase
 	// PUT: api/Products/5
 	// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
 	[HttpPut("{id:int}")]
-	public async Task<IActionResult> Put(int id, Cpu cpu)
+	public async Task<IActionResult> Put(int id, Vga vga)
 	{
-		if (id != cpu.Id)
+		var _vga = (await Get(id)).Value!;
+		if (_vga.Id != id)
 		{
 			return BadRequest();
 		}
-		_context.Entry(cpu).State = EntityState.Modified;
+		if (_vga.Id != vga.Id)
+		{
+			vga.Id = _vga.Id;
+		}
+		_context.Entry(vga).State = EntityState.Modified;
 
 		try
 		{
