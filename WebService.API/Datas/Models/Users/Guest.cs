@@ -1,14 +1,10 @@
 using WebService.API.Datas.Models.Shopping;
-using WebService.API.Service.Firebase;
+using WebService.API.VirtualBase.Interface;
 
 namespace WebService.API.Datas.Models.Users;
 
-public record Guest : User
+public record Guest(string Id) : UserInformation(Id)
 {
-	public Guest(SignInCredential credential) : base(credential)
-	{
-	}
-
 	public required ShoppingCart Cart { get; set; }
 	public ShippingInformation? ShippingInfo { get; set; }
 }
