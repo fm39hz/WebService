@@ -54,7 +54,7 @@ public class VgaController : ControllerBase
 	public async Task<IActionResult> Put(int id, Vga vga)
 	{
 		vga.Id = id;
-		_context.Entry(vga).State = EntityState.Modified;
+		_context.Update(vga);
 
 		try
 		{

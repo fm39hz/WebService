@@ -46,7 +46,7 @@ public class ProductController : ControllerBase
 	{
 		var _item = (await Get(id)).Value!;
 		_item.Quantity = product.Quantity;
-		_context.Entry(_item).State = EntityState.Modified;
+		_context.Update(_item);
 		try
 		{
 			await _context.SaveChangesAsync();

@@ -49,7 +49,7 @@ public class CpuController : ControllerBase
 	public async Task<IActionResult> Put(int id, Cpu cpu)
 	{
 		cpu.Id = id;
-		_context.Entry(cpu).State = EntityState.Modified;
+		_context.Update(cpu);
 		try
 		{
 			await _context.SaveChangesAsync();
