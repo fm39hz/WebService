@@ -11,18 +11,16 @@ public class FirebaseAuthService
 		_firebaseAuth = firebaseAuth;
 	}
 
-	public async Task<UserCredential?> SignUp(string email, string password)
+	public async Task<string?> SignUp(string email, string password)
 	{
 		var _userCredentials = await _firebaseAuth.CreateUserWithEmailAndPasswordAsync(email, password);
-
-		return _userCredentials;
+		return _userCredentials is null? null : await _userCredentials.User.GetIdTokenAsync();
 	}
 
-	public async Task<UserCredential?> Login(string email, string password)
+	public async Task<string?> Login(string email, string password)
 	{
 		var _userCredentials = await _firebaseAuth.SignInWithEmailAndPasswordAsync(email, password);
-
-		return _userCredentials;
+		return _userCredentials is null? null : await _userCredentials.User.GetIdTokenAsync();
 	}
 
 	public void SignOut()
