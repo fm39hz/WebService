@@ -21,11 +21,12 @@ public class ProductController : ControllerBase
 	[HttpGet]
 	public async Task<ActionResult<IEnumerable<ProductSet>>> GetAll()
 	{
-		if ((await _context.Products.ToListAsync()).IsNullOrEmpty())
+		var _products = await _context.Products.ToListAsync();
+		if (_products.IsNullOrEmpty())
 		{
 			return NotFound();
 		}
-		return await _context.Products.ToListAsync();
+		return _products;
 	}
 
 	[HttpGet("{id:int}")]
@@ -36,9 +37,9 @@ public class ProductController : ControllerBase
 		{
 			return NotFound();
 		}
-
 		return _item;
 	}
+
 
 	[HttpPut("{id:int}")]
 	public async Task<IActionResult> Put(int id, ProductSet product)
