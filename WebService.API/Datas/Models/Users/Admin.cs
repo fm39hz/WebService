@@ -1,5 +1,6 @@
-using WebService.API.VirtualBase.Interface;
+using FirebaseAdmin.Auth;
+using WebService.API.VirtualBase.Abstract;
 
 namespace WebService.API.Datas.Models.Users;
 
-public record Admin(string Id) : UserInformation(Id);
+public record Admin(IUserInfo UserInfo) : UserBase(UserInfo);
