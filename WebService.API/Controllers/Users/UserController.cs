@@ -15,9 +15,19 @@ public class UserController : ControllerBase
 		_authService = FirebaseAuth.GetAuth(firebaseApp);
 	}
 
-	[HttpGet("{id}")]
-	public async Task<ActionResult<UserRecord>> Get(string id)
+	[HttpGet("{uid}")]
+	public async Task<ActionResult<UserRecord>> Get(string uid)
 	{
-		return await _authService.GetUserAsync(id);
+		return await _authService.GetUserAsync(uid);
+	}
+
+	[HttpPut("{uid}")]
+	public async Task<ActionResult<UserRecord>> Put(string uid, UserRecord user)
+	{
+		return await _authService.UpdateUserAsync(new UserRecordArgs
+		{
+			Uid = uid,
+			Email = user.Email
+		});
 	}
 }
