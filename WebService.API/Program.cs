@@ -10,6 +10,7 @@ var _builder = WebApplication.CreateBuilder(args);
 var _service = _builder.Services;
 var _configuration = _builder.Configuration;
 // Add services to the container.
+_service.AddCors();
 _service.AddControllers();
 _service.AddDbContext<DataContext>(options => options.UseSqlServer(
 	_configuration.GetConnectionString("DataContext"),
@@ -40,12 +41,14 @@ _service.AddSwaggerGen();
 
 
 var _app = _builder.Build();
-
 // Configure the HTTP request pipeline.
 if (_app.Environment.IsDevelopment())
 {
 	_app.UseSwagger();
 	_app.UseSwaggerUI();
+	_app.UseCors(
+		options => options.WithOrigins("*").AllowAnyMethod()
+		);
 }
 
 

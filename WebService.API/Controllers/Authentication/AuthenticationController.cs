@@ -41,9 +41,10 @@ public class AuthenticationController : ControllerBase
 			: await _userCredentials.User.GetIdTokenAsync();
 	}
 
-	[HttpPost("Logout")]
-	public void LogOut()
+	[HttpGet("Logout")]
+	public ActionResult LogOut()
 	{
 		_authClient.SignOut();
+		return Ok();
 	}
 }
