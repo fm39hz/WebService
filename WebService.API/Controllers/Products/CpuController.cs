@@ -48,21 +48,13 @@ public class CpuController : ControllerBase
 	[HttpPut("{id:int}")]
 	public async Task<IActionResult> Put(int id, Cpu cpu)
 	{
+		if (!ItemExists(id))
+		{
+			return NotFound();
+		}
 		cpu.Id = id;
 		_context.Update(cpu);
-		try
-		{
-			await _context.SaveChangesAsync();
-		}
-		catch (DbUpdateConcurrencyException)
-		{
-			if (!ItemExists(id))
-			{
-				return NotFound();
-			}
-			throw;
-		}
-
+		await _context.SaveChangesAsync();
 		return Ok();
 	}
 

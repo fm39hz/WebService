@@ -1,5 +1,7 @@
 using Firebase.Auth;
 using Microsoft.AspNetCore.Mvc;
+using WebService.API.Datas.Context;
+using WebService.API.Datas.Models.Users;
 using WebService.API.Service.Firebase;
 
 namespace WebService.API.Controllers.Authentication;
@@ -9,19 +11,25 @@ namespace WebService.API.Controllers.Authentication;
 public class AuthenticationController : ControllerBase
 {
 	private readonly FirebaseAuthClient _authClient;
+	private readonly DataContext _context;
 
-	public AuthenticationController(FirebaseAuthClient autchClient)
+	public AuthenticationController(FirebaseAuthClient authClient, DataContext context)
 	{
-		_authClient = autchClient;
+		_authClient = authClient;
+		_context = context;
 	}
 
 	[HttpPost("Signup")]
 	public async Task<ActionResult<string>> SignUp(LoginParam param)
 	{
-		var _userCredentials = await _authClient.CreateUserWithEmailAndPasswordAsync(param.Email, param.Password);
-		return _userCredentials is null
-			? Problem("Cannot Create User, please check your information")
-			: await _userCredentials.User.GetIdTokenAsync();
+		var _userCredentials =
+			await _authClient.CreateUserWithEmailAndPasswordAsync(
+				param.Email,
+				param.Password
+				);
+		_context.Users.Add(new UserInstance(_userCredentials.User.Uid));
+		await _context.SaveChangesAsync();
+		return await _userCredentials.User.GetIdTokenAsync();
 	}
 
 	[HttpPost("Login")]
