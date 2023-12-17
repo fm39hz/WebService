@@ -29,22 +29,32 @@ public class AuthenticationController : ControllerBase
 				);
 		_context.Users.Add(new UserInstance(_userCredentials.User.Uid));
 		await _context.SaveChangesAsync();
-		return await _userCredentials.User.GetIdTokenAsync();
+		return _userCredentials.User.Uid;
 	}
 
 	[HttpPost("Login")]
 	public async Task<ActionResult<string>> LogIn(LoginParam param)
 	{
 		var _userCredentials = await _authClient.SignInWithEmailAndPasswordAsync(param.Email, param.Password);
-		return _userCredentials is null
-			? Problem("Cannot Login, please check your information")
-			: await _userCredentials.User.GetIdTokenAsync();
+		var _user = await _context.Users.FindAsync(_userCredentials.User.Uid);
+		if (_user is not null)
+		{
+			_user.SignedIn = 1;
+		}
+		else
+		{
+			return Problem("Cannot Login, please check your information");
+		}
+		_context.Users.Update(_user);
+		await _context.SaveChangesAsync();
+		return _userCredentials.User.Uid;
 	}
 
 	[HttpGet("Logout")]
 	public ActionResult LogOut()
 	{
 		_authClient.SignOut();
+
 		return Ok();
 	}
 }
