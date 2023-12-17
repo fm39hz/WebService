@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using WebService.API.Datas.Context;
 using WebService.API.Datas.Models.Products;
 using WebService.API.Service;
@@ -20,12 +19,8 @@ public class CpuController : ControllerBase
 
 	// GET: api/Cpus
 	[HttpGet]
-	public async Task<ActionResult<IEnumerable<Cpu>>> GetAll()
+	public async Task<ActionResult<List<Cpu>>> GetAll()
 	{
-		if (_context.Cpus.IsNullOrEmpty())
-		{
-			return NotFound();
-		}
 		return await _context.Cpus.ToListAsync();
 	}
 
@@ -38,7 +33,6 @@ public class CpuController : ControllerBase
 		{
 			return NotFound();
 		}
-
 		return _item;
 	}
 
@@ -67,7 +61,7 @@ public class CpuController : ControllerBase
 		{
 			return Problem("Cpu already exists");
 		}
-		_context.EnsureProductsExists(cpu);
+		if (cpu.Product != null) _context.EnsureProductsExists(cpu.Product);
 		_context.Cpus.Add(cpu);
 		await _context.SaveChangesAsync();
 

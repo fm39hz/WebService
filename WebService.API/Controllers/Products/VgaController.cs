@@ -81,7 +81,7 @@ public class VgaController : ControllerBase
 		{
 			return Problem("Vga already exists");
 		}
-		_context.EnsureProductsExists(vga);
+		if (vga.Product != null) _context.EnsureProductsExists(vga.Product);
 		_context.Vgas.Add(vga);
 		await _context.SaveChangesAsync();
 
