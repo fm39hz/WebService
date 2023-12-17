@@ -3,16 +3,22 @@ using WebService.API.VirtualBase.Interface;
 
 namespace WebService.API.Datas.Models.Shopping;
 
-public sealed record ShoppingItem(IEnumerable<IPromoteStrategy> AppliedPromoteStrategy, Product Target)
+public sealed record ShoppingItem() : ModelBase
 {
-	public required long Id { get; set; }
-	public required Product Target { get; init; } = Target;
+	public ShoppingItem(IEnumerable<IPromoteStrategy>? appliedPromoteStrategy, Product target) : this()
+	{
+		AppliedPromoteStrategy = appliedPromoteStrategy;
+		Target = target;
+	}
+
+	public IEnumerable<IPromoteStrategy>? AppliedPromoteStrategy { get; }
+	public required Product Target { get; init; }
 	public required int Quantity { get; set; }
 	public bool IsSelected { get; set; }
 
 	public double GetFinalPrice()
 	{
-		return AppliedPromoteStrategy.Aggregate(Target.BasePrice,
+		return (AppliedPromoteStrategy ?? throw new InvalidOperationException()).Aggregate(Target.BasePrice,
 			(current, promote) => promote.CheckCondition(Target)? promote.DoDiscount(current) : Target.BasePrice);
 	}
 }
