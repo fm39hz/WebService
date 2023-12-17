@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using WebService.API.Datas.Context;
 using WebService.API.Service;
-using WebService.API.VirtualBase.Abstract;
+using WebService.API.Virtual.Abstract;
 
 namespace WebService.API.Controllers.Products;
 

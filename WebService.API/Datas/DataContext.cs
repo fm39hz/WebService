@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using WebService.API.Datas.Models.Products;
 using WebService.API.Datas.Models.Users;
-using WebService.API.VirtualBase.Abstract;
+using WebService.API.Virtual.Abstract;
 
 namespace WebService.API.Datas.Context;
 

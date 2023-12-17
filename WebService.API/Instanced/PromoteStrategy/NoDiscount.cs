@@ -1,5 +1,5 @@
-using WebService.API.VirtualBase.Abstract;
-using WebService.API.VirtualBase.Interface;
+using WebService.API.Virtual.Abstract;
+using WebService.API.Virtual.Interface;
 
 namespace WebService.API.Instanced.PromoteStrategy;
 

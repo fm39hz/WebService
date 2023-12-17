@@ -1,5 +1,5 @@
 using WebService.API.Instanced.PromoteStrategy;
-using WebService.API.VirtualBase.Interface;
+using WebService.API.Virtual.Interface;
 
 namespace WebService.API.Controllers;
 

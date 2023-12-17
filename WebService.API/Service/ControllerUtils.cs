@@ -1,5 +1,5 @@
 using WebService.API.Datas.Context;
-using WebService.API.VirtualBase.Abstract;
+using WebService.API.Virtual.Abstract;
 
 namespace WebService.API.Service;
 
