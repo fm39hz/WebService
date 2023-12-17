@@ -27,7 +27,10 @@ public class AuthenticationController : ControllerBase
 				param.Email,
 				param.Password
 				);
-		_context.Users.Add(new UserInstance(_userCredentials.User.Uid));
+		_context.Users.Add(new UserInstance(_userCredentials.User.Uid)
+		{
+			Credential = _userCredentials.User.Credential.IdToken
+		});
 		await _context.SaveChangesAsync();
 		return _userCredentials.User.Uid;
 	}
@@ -37,24 +40,28 @@ public class AuthenticationController : ControllerBase
 	{
 		var _userCredentials = await _authClient.SignInWithEmailAndPasswordAsync(param.Email, param.Password);
 		var _user = await _context.Users.FindAsync(_userCredentials.User.Uid);
-		if (_user is not null)
+		if (_user is null)
 		{
-			_user.SignedIn = 1;
+			return NotFound();
 		}
-		else
-		{
-			return Problem("Cannot Login, please check your information");
-		}
+		_user.Credential = _userCredentials.User.Credential.IdToken;
 		_context.Users.Update(_user);
 		await _context.SaveChangesAsync();
 		return _userCredentials.User.Uid;
 	}
 
-	[HttpGet("Logout")]
-	public ActionResult LogOut()
+	[HttpGet("Logout/{uid}")]
+	public async Task<ActionResult> LogOut(string uid)
 	{
 		_authClient.SignOut();
-
+		var _user = await _context.Users.FindAsync(uid);
+		if (_user is null)
+		{
+			return NotFound();
+		}
+		_user.Credential = null;
+		_context.Users.Update(_user);
+		await _context.SaveChangesAsync();
 		return Ok();
 	}
 }

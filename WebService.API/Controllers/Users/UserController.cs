@@ -32,11 +32,7 @@ public class UserController : ControllerBase
 		{
 			return NotFound();
 		}
-		return _user.SignedIn switch
-		{
-			1 => true,
-			_ => false
-		};
+		return _user.Credential is not null;
 	}
 
 	[HttpPut("{uid}")]
