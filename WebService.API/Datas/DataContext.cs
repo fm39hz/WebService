@@ -24,21 +24,21 @@ public class DataContext : DbContext
 		modelBuilder.Entity<UserInstance>().HasKey(u => u.Uid);
 		modelBuilder.Entity<Product>(entity =>
 		{
-			entity.HasOne(p => p.Cpu)
+			entity.HasOne<Cpu>()
 			.WithOne(c => c.Product)
 			.HasForeignKey<Product>(p => p.ConcreateId);
-			entity.HasOne(p => p.Vga)
+			entity.HasOne<Vga>()
 			.WithOne(v => v.Product)
 			.HasForeignKey<Product>(p => p.ConcreateId);
 		});
 		modelBuilder.Entity<ShoppingCart>(entity =>
 		{
 			entity.HasKey(e => e.Id);
-			entity.HasOne(e => e.User)
-			.WithMany()
-			.HasForeignKey(e => e.UserUid);
+			entity.HasOne<UserInstance>()
+			.WithOne(u => u.Cart)
+			.HasForeignKey<ShoppingCart>(c => c.UserUid);
 			entity.HasMany(e => e.ShoppingItems)
-			.WithOne(e => e.Cart)
+			.WithOne()
 			.HasForeignKey(e => e.CartId);
 		});
 		modelBuilder.Entity<ShoppingItem>(entity =>
@@ -48,7 +48,7 @@ public class DataContext : DbContext
 			.WithMany()
 			.HasForeignKey(e => e.ProductId)
 			.IsRequired();
-			entity.HasOne(i => i.Cart)
+			entity.HasOne<ShoppingCart>()
 			.WithMany(c => c.ShoppingItems)
 			.HasForeignKey(i => i.CartId);
 		});

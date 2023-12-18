@@ -6,5 +6,5 @@ public record Vga : ModelBase
 {
 	public float Frequency { get; set; }
 	public int Vram { get; set; }
-	public Product? Product { get; set; }
+	public virtual Product? Product { get; set; }
 }

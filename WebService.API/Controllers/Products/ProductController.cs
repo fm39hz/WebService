@@ -45,7 +45,7 @@ public class ProductController : ControllerBase
 	public async Task<IActionResult> Put(int id, Product product)
 	{
 		var _item = (await Get(id)).Value!;
-		_item.Quantity = product.Quantity;
+		_item.InStock = product.InStock;
 		_context.Update(_item);
 		try
 		{
