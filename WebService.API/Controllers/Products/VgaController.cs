@@ -22,11 +22,12 @@ public class VgaController : ControllerBase
 	[HttpGet]
 	public async Task<ActionResult<IEnumerable<Vga>>> GetAll()
 	{
-		if (_context.Vgas.IsNullOrEmpty())
+		var _vgas = await _context.Vgas.ToListAsync();
+		if (_vgas.IsNullOrEmpty())
 		{
 			return NotFound();
 		}
-		return await _context.Vgas.Select(v => v.WithProduct(_context.Products)).ToListAsync();
+		return _vgas.Select(v => v.WithProduct(_context.Products)).ToList();
 	}
 
 	// GET: api/Vgas/0
@@ -81,8 +82,7 @@ public class VgaController : ControllerBase
 		{
 			return Problem("Vga already exists");
 		}
-		if (vga.Product != null) _context.EnsureProductsExists(vga.Product);
-		_context.Vgas.Add(vga.WithProduct(_context.Products));
+		_context.Vgas.Add(vga);
 		await _context.SaveChangesAsync();
 
 		return CreatedAtAction("Get", new { id = vga.Id }, vga);
@@ -101,7 +101,6 @@ public class VgaController : ControllerBase
 		{
 			return NotFound();
 		}
-
 		_context.Vgas.Remove(_item.WithProduct(_context.Products));
 		await _context.SaveChangesAsync();
 

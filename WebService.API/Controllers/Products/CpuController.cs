@@ -62,7 +62,6 @@ public class CpuController : ControllerBase
 		{
 			return Problem("Cpu already exists");
 		}
-		if (cpu.Product != null) _context.EnsureProductsExists(cpu.Product);
 		_context.Cpus.Add(cpu);
 		await _context.SaveChangesAsync();
 
