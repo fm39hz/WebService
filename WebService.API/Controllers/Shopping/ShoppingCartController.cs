@@ -35,7 +35,6 @@ public class ShoppingCartController : ControllerBase
 		{
 			return NotFound();
 		}
-		var _finalItem = _item.WithShoppingItems(_context);
-		return _finalItem.GetFinalPrice();
+		return _item.WithShoppingItems(_context).GetFinalPrice();
 	}
 }
