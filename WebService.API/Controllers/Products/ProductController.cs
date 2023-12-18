@@ -44,21 +44,12 @@ public class ProductController : ControllerBase
 	[HttpPut("{id:int}")]
 	public async Task<IActionResult> Put(int id, Product product)
 	{
-		var _item = (await Get(id)).Value!;
-		_item.InStock = product.InStock;
-		_context.Update(_item);
-		try
+		if (!ItemExists(id))
 		{
-			await _context.SaveChangesAsync();
+			return NotFound();
 		}
-		catch (DbUpdateConcurrencyException)
-		{
-			if (!ItemExists(id))
-			{
-				return NotFound();
-			}
-			throw;
-		}
+		_context.Update(product);
+		await _context.SaveChangesAsync();
 		return Ok();
 	}
 
