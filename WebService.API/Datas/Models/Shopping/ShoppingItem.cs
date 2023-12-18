@@ -12,7 +12,7 @@ public record ShoppingItem : ModelBase
 	}
 
 	public string? PromoteType { get; init; }
-	public virtual Product Target { get; init; } = null!;
+	public virtual Product? Target { get; set; }
 	public int ProductId { get; init; }
 	public int CartId { get; init; }
 	public int Quantity { get; init; }

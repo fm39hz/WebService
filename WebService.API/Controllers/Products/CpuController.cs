@@ -21,7 +21,8 @@ public class CpuController : ControllerBase
 	[HttpGet]
 	public async Task<ActionResult<List<Cpu>>> GetAll()
 	{
-		return await _context.Cpus.ToListAsync();
+		var _cpus = await _context.Cpus.ToListAsync();
+		return _cpus.Select(cpu => cpu.WithProduct(_context.Products)).ToList();
 	}
 
 	// GET: api/Cpus/0
@@ -33,7 +34,7 @@ public class CpuController : ControllerBase
 		{
 			return NotFound();
 		}
-		return _item;
+		return _item.WithProduct(_context.Products);
 	}
 
 
@@ -82,7 +83,7 @@ public class CpuController : ControllerBase
 			return NotFound();
 		}
 
-		_context.Cpus.Remove(_item);
+		_context.Cpus.Remove(_item.WithProduct(_context.Products));
 		await _context.SaveChangesAsync();
 
 		return NoContent();

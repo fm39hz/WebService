@@ -24,7 +24,7 @@ public class ShoppingCartController : ControllerBase
 		{
 			return NotFound();
 		}
-		return _item.WithProducts(_context.ShoppingItems);
+		return _item.WithShoppingItems(_context);
 	}
 
 	[HttpGet("GetPrice/{id:int}")]
@@ -35,6 +35,7 @@ public class ShoppingCartController : ControllerBase
 		{
 			return NotFound();
 		}
-		return _item.WithProducts(_context.ShoppingItems).GetFinalPrice();
+		var _finalItem = _item.WithShoppingItems(_context);
+		return _finalItem.GetFinalPrice();
 	}
 }
