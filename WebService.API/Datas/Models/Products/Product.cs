@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using WebService.API.Datas.Models.Products;
+using WebService.API.Datas.Models.Shopping;
 using WebService.API.Virtual.Interface;
 
 namespace WebService.API.Virtual.Abstract;
@@ -23,9 +24,10 @@ public record Product : ModelBase
 	public int Quantity { get; set; }
 	public string? Manufacturer { get; set; }
 
-	public double GetFinalPrice(IEnumerable<IPromoteStrategy>? appliedPromoteStrategy)
+	public ShoppingItem? ShoppingItem { get; set; }
+
+	public double GetFinalPrice(IPromoteStrategy appliedPromoteStrategy)
 	{
-		return (appliedPromoteStrategy ?? throw new InvalidOperationException()).Aggregate(BasePrice,
-			(current, promote) => promote.CheckCondition(this)? promote.DoDiscount(current) : BasePrice);
+		return appliedPromoteStrategy.CheckCondition(this)? appliedPromoteStrategy.DoDiscount(BasePrice) : BasePrice;
 	}
 }
