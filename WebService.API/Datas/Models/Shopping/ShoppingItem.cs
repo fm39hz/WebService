@@ -20,9 +20,6 @@ public record ShoppingItem : ModelBase
 
 	public double GetFinalPrice()
 	{
-		return (AppliedPromoteStrategy.CheckCondition(Target)
-					? AppliedPromoteStrategy.DoDiscount(Target.BasePrice)
-					: Target.BasePrice) *
-				Quantity;
+		return Target.GetPromotePrice(AppliedPromoteStrategy) * Quantity;
 	}
 }

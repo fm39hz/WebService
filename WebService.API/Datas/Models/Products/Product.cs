@@ -1,3 +1,5 @@
+using WebService.API.Virtual.Interface;
+
 namespace WebService.API.Virtual.Abstract;
 
 public record Product : ModelBase
@@ -9,4 +11,13 @@ public record Product : ModelBase
 	public double BasePrice { get; init; }
 	public int InStock { get; set; }
 	public string? Manufacturer { get; init; }
+	public int ReviewCount { get; set; }
+	public double Rating { get; set; }
+
+	public double GetPromotePrice(IPromoteStrategy promoteStrategy)
+	{
+		return promoteStrategy.CheckCondition(this)
+			? promoteStrategy.DoDiscount(BasePrice)
+			: BasePrice;
+	}
 }
