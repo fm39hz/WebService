@@ -9,6 +9,5 @@ public record Cpu : ModelBase
 	public int Core { get; init; }
 	public int Thread { get; init; }
 	public double Frequency { get; init; }
-	public string? Manufacturer { get; init; }
 	public virtual Product? Product { get; set; }
 }
