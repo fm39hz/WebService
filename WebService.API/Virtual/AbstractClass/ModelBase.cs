@@ -1,4 +1,4 @@
-namespace WebService.API.VirtualBase.Abstract;
+namespace WebService.API.Virtual.Abstract;
 
 public abstract record ModelBase
 {

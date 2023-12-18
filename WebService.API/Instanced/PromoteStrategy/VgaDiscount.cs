@@ -3,20 +3,20 @@ using WebService.API.Virtual.Interface;
 
 namespace WebService.API.Instanced.PromoteStrategy;
 
-public class NoDiscount : IPromoteStrategy
+public class VgaDiscount : IPromoteStrategy
 {
 	public string Details
 	{
-		get { return "Mức giá gốc của sản phẩm"; }
+		get { return "Giảm giá 35% cho tất cả các sản phẩm thuộc loại Vga"; }
 	}
 
 	public double DoDiscount(double basePrice)
 	{
-		return basePrice;
+		return basePrice - basePrice * 35 / 100;
 	}
 
 	public bool CheckCondition(Product product)
 	{
-		return true;
+		return product.Type == "Vga";
 	}
 }

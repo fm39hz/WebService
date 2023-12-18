@@ -26,7 +26,7 @@ public class VgaController : ControllerBase
 		{
 			return NotFound();
 		}
-		return await _context.Vgas.ToListAsync();
+		return await _context.Vgas.Select(v => v.WithProduct(_context.Products)).ToListAsync();
 	}
 
 	// GET: api/Vgas/0
@@ -44,7 +44,7 @@ public class VgaController : ControllerBase
 			return NotFound();
 		}
 
-		return _item;
+		return _item.WithProduct(_context.Products);
 	}
 
 
@@ -69,7 +69,7 @@ public class VgaController : ControllerBase
 			throw;
 		}
 
-		return NoContent();
+		return Ok();
 	}
 
 	// POST: api/Vgas
@@ -81,8 +81,8 @@ public class VgaController : ControllerBase
 		{
 			return Problem("Vga already exists");
 		}
-		_context.EnsureProductsExists(vga);
-		_context.Vgas.Add(vga);
+		if (vga.Product != null) _context.EnsureProductsExists(vga.Product);
+		_context.Vgas.Add(vga.WithProduct(_context.Products));
 		await _context.SaveChangesAsync();
 
 		return CreatedAtAction("Get", new { id = vga.Id }, vga);
@@ -102,7 +102,7 @@ public class VgaController : ControllerBase
 			return NotFound();
 		}
 
-		_context.Vgas.Remove(_item);
+		_context.Vgas.Remove(_item.WithProduct(_context.Products));
 		await _context.SaveChangesAsync();
 
 		return NoContent();

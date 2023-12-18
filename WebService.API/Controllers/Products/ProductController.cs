@@ -2,8 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using WebService.API.Datas.Context;
-using WebService.API.Datas.Models.Products;
 using WebService.API.Service;
+using WebService.API.Virtual.Abstract;
 
 namespace WebService.API.Controllers.Products;
 
@@ -19,7 +19,7 @@ public class ProductController : ControllerBase
 	}
 
 	[HttpGet]
-	public async Task<ActionResult<IEnumerable<ProductSet>>> GetAll()
+	public async Task<ActionResult<IEnumerable<Product>>> GetAll()
 	{
 		var _products = await _context.Products.ToListAsync();
 		if (_products.IsNullOrEmpty())
@@ -30,7 +30,7 @@ public class ProductController : ControllerBase
 	}
 
 	[HttpGet("{id:int}")]
-	public async Task<ActionResult<ProductSet>> Get(int id)
+	public async Task<ActionResult<Product>> Get(int id)
 	{
 		var _item = await _context.Products.FindAsync(id);
 		if (!ItemExists(id) || _item == null)
@@ -42,23 +42,14 @@ public class ProductController : ControllerBase
 
 
 	[HttpPut("{id:int}")]
-	public async Task<IActionResult> Put(int id, ProductSet product)
+	public async Task<IActionResult> Put(int id, Product product)
 	{
-		var _item = (await Get(id)).Value!;
-		_item.Quantity = product.Quantity;
-		_context.Update(_item);
-		try
+		if (!ItemExists(id))
 		{
-			await _context.SaveChangesAsync();
+			return NotFound();
 		}
-		catch (DbUpdateConcurrencyException)
-		{
-			if (!ItemExists(id))
-			{
-				return NotFound();
-			}
-			throw;
-		}
+		_context.Update(product);
+		await _context.SaveChangesAsync();
 		return Ok();
 	}
 

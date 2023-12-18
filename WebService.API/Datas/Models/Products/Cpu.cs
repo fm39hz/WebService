@@ -1,13 +1,13 @@
-using WebService.API.VirtualBase.Abstract;
+using WebService.API.Virtual.Abstract;
 
 namespace WebService.API.Datas.Models.Products;
 
-public record Cpu : Product
+public record Cpu : ModelBase
 {
-	public string? Socket { get; set; }
-	public int Tdp { get; set; }
-	public int Core { get; set; }
-	public int Thread { get; set; }
-	public double Frequency { get; set; }
-	public string? Manufacturer { get; set; }
+	public string? Socket { get; init; }
+	public int Tdp { get; init; }
+	public int Core { get; init; }
+	public int Thread { get; init; }
+	public double Frequency { get; init; }
+	public virtual Product? Product { get; set; }
 }

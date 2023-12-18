@@ -1,18 +1,25 @@
-using WebService.API.VirtualBase.Abstract;
-using WebService.API.VirtualBase.Interface;
+using WebService.API.Controllers;
+using WebService.API.Virtual.Abstract;
+using WebService.API.Virtual.Interface;
 
 namespace WebService.API.Datas.Models.Shopping;
 
-public sealed record ShoppingItem(IEnumerable<IPromoteStrategy> AppliedPromoteStrategy, Product Target)
+public record ShoppingItem : ModelBase
 {
-	public required long Id { get; set; }
-	public required Product Target { get; init; } = Target;
-	public required int Quantity { get; set; }
-	public bool IsSelected { get; set; }
+	public IPromoteStrategy AppliedPromoteStrategy
+	{
+		get { return AbstractFactory.GetPromote(PromoteType!); }
+	}
+
+	public string? PromoteType { get; init; }
+	public virtual Product? Target { get; set; }
+	public int ProductId { get; init; }
+	public int CartId { get; init; }
+	public int Quantity { get; init; }
+	public int IsSelected { get; set; }
 
 	public double GetFinalPrice()
 	{
-		return AppliedPromoteStrategy.Aggregate(Target.BasePrice,
-			(current, promote) => promote.CheckCondition(Target)? promote.DoDiscount(current) : Target.BasePrice);
+		return Target.GetPromotePrice(AppliedPromoteStrategy) * Quantity;
 	}
 }

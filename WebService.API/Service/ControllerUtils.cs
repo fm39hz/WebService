@@ -1,6 +1,5 @@
 using WebService.API.Datas.Context;
-using WebService.API.Datas.Models.Products;
-using WebService.API.VirtualBase.Abstract;
+using WebService.API.Virtual.Abstract;
 
 namespace WebService.API.Service;
 
@@ -9,15 +8,15 @@ public static class ControllerUtils
 	/// <summary>
 	/// Make sure that Products is exist, if not it will create new item to db
 	/// </summary>
-	/// <param name="context">Context that has DbSet for ProductSet</param>
-	/// <param name="product">the product that relate to ProductSet</param>
+	/// <param name="context">Context that has DbSet for Products</param>
+	/// <param name="product">the product that relate to Products</param>
 	public static void EnsureProductsExists(this DataContext context, Product product)
 	{
-		if (!context.Products.Any(a => a.ProductId == product.Id))
+		if (!context.Products.Any(a => a.SpecificationId == product.Id))
 		{
-			context.Products.Add(new ProductSet
+			context.Products.Add(new Product
 			{
-				ProductId = product.Id
+				SpecificationId = product.Id
 			});
 		}
 	}

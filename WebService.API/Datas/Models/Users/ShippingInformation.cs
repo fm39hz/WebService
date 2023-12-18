@@ -1,8 +1,10 @@
+using WebService.API.Virtual.Abstract;
+
 namespace WebService.API.Datas.Models.Users;
 
-public record ShippingInformation
+public sealed record ShippingInformation : ModelBase
 {
-	public long UserId { get; set; }
-	public required string PhoneNumber { get; set; }
-	public required string Address { get; set; }
+	public string? UserUId { get; init; }
+	public required string PhoneNumber { get; init; }
+	public required string Address { get; init; }
 }
