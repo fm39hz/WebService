@@ -5,7 +5,7 @@ namespace WebService.API.Datas.Models.Shopping;
 public record ShoppingCart : ModelBase
 {
 	public string? UserUid { get; init; }
-	public virtual List<ShoppingItem> ShoppingItems { get; init; } = new();
+	public virtual List<ShoppingItem> ShoppingItems { get; set; } = new();
 
 	public double GetFinalPrice()
 	{

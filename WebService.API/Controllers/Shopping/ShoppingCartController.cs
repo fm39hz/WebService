@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using WebService.API.Datas.Context;
 using WebService.API.Datas.Models.Shopping;
+using WebService.API.Service;
 
 namespace WebService.API.Controllers.Shopping;
 
@@ -23,7 +24,7 @@ public class ShoppingCartController : ControllerBase
 		{
 			return NotFound();
 		}
-		return _item;
+		return _item.WithProducts(_context.ShoppingItems);
 	}
 
 	[HttpGet("GetPrice/{id:int}")]
@@ -34,6 +35,6 @@ public class ShoppingCartController : ControllerBase
 		{
 			return NotFound();
 		}
-		return _item.GetFinalPrice();
+		return _item.WithProducts(_context.ShoppingItems).GetFinalPrice();
 	}
 }
