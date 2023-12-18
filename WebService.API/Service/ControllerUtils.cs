@@ -12,11 +12,11 @@ public static class ControllerUtils
 	/// <param name="product">the product that relate to Products</param>
 	public static void EnsureProductsExists(this DataContext context, Product product)
 	{
-		if (!context.Products.Any(a => a.ConcreateId == product.Id))
+		if (!context.Products.Any(a => a.SpecificationId == product.Id))
 		{
 			context.Products.Add(new Product
 			{
-				ConcreateId = product.Id
+				SpecificationId = product.Id
 			});
 		}
 	}

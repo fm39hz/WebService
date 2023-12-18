@@ -26,10 +26,10 @@ public class DataContext : DbContext
 		{
 			entity.HasOne<Cpu>()
 			.WithOne(c => c.Product)
-			.HasForeignKey<Product>(p => p.ConcreateId);
+			.HasForeignKey<Product>(p => p.SpecificationId);
 			entity.HasOne<Vga>()
 			.WithOne(v => v.Product)
-			.HasForeignKey<Product>(p => p.ConcreateId);
+			.HasForeignKey<Product>(p => p.SpecificationId);
 		});
 		modelBuilder.Entity<ShoppingCart>(entity =>
 		{
