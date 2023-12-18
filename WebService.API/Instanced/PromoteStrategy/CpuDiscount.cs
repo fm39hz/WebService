@@ -7,7 +7,7 @@ public class CpuDiscount : IPromoteStrategy
 {
 	public string Details
 	{
-		get { return "Giảm giá 15% cho tất cả các Cpu"; }
+		get { return "Giảm giá 15% cho tất cả các sản phẩm thuộc loại Cpu"; }
 	}
 
 	public bool CheckCondition(Product product)

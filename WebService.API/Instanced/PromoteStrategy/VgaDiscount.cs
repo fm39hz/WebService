@@ -7,7 +7,7 @@ public class VgaDiscount : IPromoteStrategy
 {
 	public string Details
 	{
-		get { return "Giảm giá 15% cho tất cả các Cpu"; }
+		get { return "Giảm giá 35% cho tất cả các sản phẩm thuộc loại Vga"; }
 	}
 
 	public double DoDiscount(double basePrice)
