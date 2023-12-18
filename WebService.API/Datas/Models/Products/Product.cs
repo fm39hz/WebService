@@ -14,6 +14,8 @@ public record Product : ModelBase
 	public int ReviewCount { get; set; }
 	public double Rating { get; set; }
 
+	public string? Type { get; set; }
+
 	public double GetPromotePrice(IPromoteStrategy promoteStrategy)
 	{
 		return promoteStrategy.CheckCondition(this)

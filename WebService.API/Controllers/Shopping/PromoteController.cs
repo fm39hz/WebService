@@ -14,14 +14,14 @@ public class PromoteController : ControllerBase
 		_context = context;
 	}
 
-	[HttpGet("{productId:int}/{promote:int}")]
-	public async Task<ActionResult<double>> GetPromote(int productId, int promote)
+	[HttpGet("{productId:int}")]
+	public async Task<ActionResult<double>> GetPromotePrice(int productId)
 	{
 		var _product = await _context.Products.FindAsync(productId);
 		if (_product is null)
 		{
 			return NotFound();
 		}
-		return _product.GetPromotePrice(AbstractFactory.GetPromote(promote));
+		return _product.GetPromotePrice(AbstractFactory.GetPromote(_product.Type!));
 	}
 }

@@ -8,10 +8,10 @@ public record ShoppingItem : ModelBase
 {
 	public IPromoteStrategy AppliedPromoteStrategy
 	{
-		get { return AbstractFactory.GetPromote(Promote); }
+		get { return AbstractFactory.GetPromote(PromoteType!); }
 	}
 
-	public int Promote { get; init; }
+	public string? PromoteType { get; init; }
 	public virtual Product Target { get; init; } = null!;
 	public int ProductId { get; init; }
 	public int CartId { get; init; }

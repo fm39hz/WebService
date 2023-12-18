@@ -5,11 +5,12 @@ namespace WebService.API.Controllers;
 
 public static class AbstractFactory
 {
-	public static IPromoteStrategy GetPromote(int strategy)
+	public static IPromoteStrategy GetPromote(string strategy)
 	{
 		return strategy switch
 		{
-			15 => new FifteenPercentDiscount(),
+			"Cpu" => new CpuDiscount(),
+			"Vga" => new VgaDiscount(),
 			_ => new NoDiscount()
 		};
 	}

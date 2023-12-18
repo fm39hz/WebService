@@ -3,16 +3,16 @@ using WebService.API.Virtual.Interface;
 
 namespace WebService.API.Instanced.PromoteStrategy;
 
-public class FifteenPercentDiscount : IPromoteStrategy
+public class CpuDiscount : IPromoteStrategy
 {
 	public string Details
 	{
-		get { return "Giảm giá 15% cho tất cả các sản phẩm"; }
+		get { return "Giảm giá 15% cho tất cả các Cpu"; }
 	}
 
 	public bool CheckCondition(Product product)
 	{
-		return true;
+		return product.Type == "Cpu";
 	}
 
 	public double DoDiscount(double basePrice)
