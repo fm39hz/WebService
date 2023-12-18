@@ -15,13 +15,19 @@ public class DataContext : DbContext
 	public DbSet<UserInstance> Users { get; init; } = null!;
 	public DbSet<Product> Products { get; init; } = null!;
 	public DbSet<ShoppingCart> ShoppingCarts { get; init; } = null!;
+	public DbSet<ShippingInformation> ShippingInformations { get; init; } = null!;
 	public DbSet<ShoppingItem> ShoppingItems { get; init; } = null!;
 	public DbSet<Vga> Vgas { get; init; } = null!;
 	public DbSet<Cpu> Cpus { get; init; } = null!;
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
-		modelBuilder.Entity<UserInstance>().HasKey(u => u.Uid);
+		modelBuilder.Entity<UserInstance>(entity =>
+		{
+			entity.HasKey(u => u.Uid);
+			entity.HasOne(u => u.ShippingInfo)
+			.WithOne().HasForeignKey<ShippingInformation>(i => i.UserUId);
+		});
 		modelBuilder.Entity<Product>(entity =>
 		{
 			entity.HasOne<Cpu>()
