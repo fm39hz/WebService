@@ -62,6 +62,7 @@ public class CpuController : ControllerBase
 		{
 			return Problem("Cpu already exists");
 		}
+		cpu.Product!.Type = "Cpu";
 		_context.Cpus.Add(cpu);
 		await _context.SaveChangesAsync();
 
@@ -81,10 +82,9 @@ public class CpuController : ControllerBase
 		{
 			return NotFound();
 		}
-
 		_context.Cpus.Remove(_item.WithProduct(_context.Products));
+		_context.Products.RemoveProduct(_item);
 		await _context.SaveChangesAsync();
-
 		return NoContent();
 	}
 

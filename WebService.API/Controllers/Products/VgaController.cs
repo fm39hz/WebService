@@ -82,6 +82,7 @@ public class VgaController : ControllerBase
 		{
 			return Problem("Vga already exists");
 		}
+		vga.Product!.Type = "Vga";
 		_context.Vgas.Add(vga);
 		await _context.SaveChangesAsync();
 
@@ -102,8 +103,8 @@ public class VgaController : ControllerBase
 			return NotFound();
 		}
 		_context.Vgas.Remove(_item.WithProduct(_context.Products));
+		_context.Products.RemoveProduct(_item);
 		await _context.SaveChangesAsync();
-
 		return NoContent();
 	}
 
