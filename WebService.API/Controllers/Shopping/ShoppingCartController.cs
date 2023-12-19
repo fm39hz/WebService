@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebService.API.Datas.Context;
 using WebService.API.Datas.Models.Shopping;
 using WebService.API.Service;
@@ -16,25 +17,17 @@ public class ShoppingCartController : ControllerBase
 		_context = context;
 	}
 
-	[HttpGet("{id:int}")]
-	public async Task<ActionResult<ShoppingCart>> Get(int id)
+	[HttpGet("{uid}")]
+	public async Task<ActionResult<ShoppingCart>> Get(string uid)
 	{
-		var _item = await _context.ShoppingCarts.FindAsync(id);
-		if (_item is null)
-		{
-			return NotFound();
-		}
-		return _item.WithShoppingItems(_context);
+		var _item = await _context.ShoppingCarts.ToListAsync();
+		return _item.First(c => c.UserUid == uid).WithShoppingItems(_context);
 	}
 
-	[HttpGet("GetPrice/{id:int}")]
-	public async Task<ActionResult<double>> GetPrice(int id)
+	[HttpGet("GetPrice/{uid}")]
+	public async Task<ActionResult<double>> GetPrice(string uid)
 	{
-		var _item = await _context.ShoppingCarts.FindAsync(id);
-		if (_item is null)
-		{
-			return NotFound();
-		}
-		return _item.WithShoppingItems(_context).GetFinalPrice();
+		var _item = await _context.ShoppingCarts.ToListAsync();
+		return _item.First(c => c.UserUid == uid).WithShoppingItems(_context).GetFinalPrice();
 	}
 }

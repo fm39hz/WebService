@@ -9,12 +9,22 @@ public static class ModelUtils
 {
 	public static ShoppingCart WithShoppingItems(this ShoppingCart cart, DataContext context)
 	{
-		foreach (var _shoppingItem in context.ShoppingItems.Where(i =>
-					i.CartId == cart.Id && !cart.ShoppingItems.Contains(i)))
+		foreach (var _shoppingItem in context.ShoppingItems)
 		{
-			cart.ShoppingItems.Add(_shoppingItem.WithProduct(context.Products));
+			if (_shoppingItem.CartId == cart.Id)
+			{
+			}
 		}
-		return cart;
+		return cart with
+		{
+			ShoppingItems = cart.ShoppingItems.WithShoppingProduct(context).ToList()
+		};
+	}
+
+	public static IEnumerable<ShoppingItem> WithShoppingProduct(this IEnumerable<ShoppingItem> items,
+		DataContext context)
+	{
+		return items.Select(shoppingItem => shoppingItem.WithProduct(context.Products));
 	}
 
 	public static ShoppingItem WithProduct(this ShoppingItem item, IEnumerable<Product> products)
