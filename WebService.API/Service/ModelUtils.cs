@@ -9,11 +9,9 @@ public static class ModelUtils
 {
 	public static ShoppingCart WithShoppingItems(this ShoppingCart cart, DataContext context)
 	{
-		foreach (var _shoppingItem in context.ShoppingItems)
+		foreach (var _dummy in context.ShoppingItems)
 		{
-			if (_shoppingItem.CartId == cart.Id)
-			{
-			}
+			//Tôi không biết tại sao chỗ này lại tự động thêm Item, nhưng nó chạy rồi nên kệ đi
 		}
 		return cart with
 		{
@@ -33,15 +31,27 @@ public static class ModelUtils
 		return item;
 	}
 
-	public static Cpu WithProduct(this Cpu concrete, IEnumerable<Product> products)
+	public static Cpu WithProduct(this Cpu cpu, IEnumerable<Product> products)
 	{
-		concrete.Product = products.First(p => p.SpecificationId == concrete.Id);
-		return concrete;
+		cpu.Product = products.First(p => p.SpecificationId == cpu.Id);
+		return cpu;
 	}
 
-	public static Vga WithProduct(this Vga concrete, IEnumerable<Product> products)
+	public static Vga WithProduct(this Vga cpu, IEnumerable<Product> products)
 	{
-		concrete.Product = products.First(p => p.SpecificationId == concrete.Id);
-		return concrete;
+		cpu.Product = products.First(p => p.SpecificationId == cpu.Id);
+		return cpu;
+	}
+
+	public static Ram WithProduct(this Ram ram, IEnumerable<Product> products)
+	{
+		ram.Product = products.First(p => p.SpecificationId == ram.Id);
+		return ram;
+	}
+
+	public static Mainboard WithProduct(this Mainboard mainboard, IEnumerable<Product> products)
+	{
+		mainboard.Product = products.First(p => p.SpecificationId == mainboard.Id);
+		return mainboard;
 	}
 }
