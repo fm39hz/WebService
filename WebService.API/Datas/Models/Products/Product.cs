@@ -16,7 +16,7 @@ public record Product : ModelBase
 
 	public string? Type { get; set; }
 
-	public double GetPromotePrice(IPromoteStrategy promoteStrategy)
+	public double GetPromotedPrice(IPromoteStrategy promoteStrategy)
 	{
 		return promoteStrategy.CheckCondition(this)
 			? promoteStrategy.DoDiscount(BasePrice)

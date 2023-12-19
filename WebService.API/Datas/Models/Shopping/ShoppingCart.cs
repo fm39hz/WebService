@@ -10,7 +10,7 @@ public record ShoppingCart : ModelBase
 
 	public double GetFinalPrice()
 	{
-		return (ShoppingItems ?? throw new InvalidOperationException())
+		return (ShoppingItems ?? throw new NullReferenceException())
 		.Sum(items => items.IsSelected == 1? items.GetFinalPrice() : 0);
 	}
 }

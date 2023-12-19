@@ -22,6 +22,6 @@ public class PromoteController : ControllerBase
 		{
 			return NotFound();
 		}
-		return _product.GetPromotePrice(AbstractFactory.GetPromote(_product.Type!));
+		return _product.GetPromotedPrice(AbstractFactory.GetPromote(_product.Type!));
 	}
 }
