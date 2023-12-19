@@ -9,10 +9,10 @@ public record Product : ModelBase
 	public string? Description { get; init; }
 	public string? ImageUrl { get; init; }
 	public double BasePrice { get; init; }
-	public int InStock { get; set; }
+	public int InStock { get; init; }
 	public string? Manufacturer { get; init; }
-	public int ReviewCount { get; set; }
-	public double Rating { get; set; }
+	public int ReviewCount { get; init; }
+	public double Rating { get; init; }
 
 	public string? Type { get; set; }
 

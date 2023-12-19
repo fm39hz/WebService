@@ -4,7 +4,7 @@ namespace WebService.API.Datas.Models.Products;
 
 public record Vga : ModelBase
 {
-	public double Frequency { get; set; }
-	public int Vram { get; set; }
+	public double Frequency { get; init; }
+	public int Vram { get; init; }
 	public virtual Product? Product { get; set; }
 }
