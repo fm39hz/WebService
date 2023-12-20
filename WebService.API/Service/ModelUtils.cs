@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using WebService.API.Datas.Context;
 using WebService.API.Datas.Models.Products;
 using WebService.API.Datas.Models.Shopping;
@@ -9,10 +10,7 @@ public static class ModelUtils
 {
 	public static ShoppingCart WithShoppingItems(this ShoppingCart cart, DataContext context)
 	{
-		foreach (var _dummy in context.ShoppingItems)
-		{
-			//Tôi không biết tại sao chỗ này lại tự động thêm Item, nhưng nó chạy rồi nên kệ đi
-		}
+		context.ShoppingItems.Load();
 		return cart with
 		{
 			ShoppingItems = cart.ShoppingItems.WithShoppingProduct(context).ToList()
