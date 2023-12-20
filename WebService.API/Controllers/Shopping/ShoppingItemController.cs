@@ -31,13 +31,22 @@ public class ShoppingItemController : ControllerBase
 		return _item.First(c => c.Id == id).WithProduct(_context.Products);
 	}
 
+	[HttpGet("GetPrice/{id:int}")]
+	public async Task<ActionResult<double>> GetFinalPrice(int id)
+	{
+		var _item = await _context.ShoppingItems.FindAsync(id);
+		if (!ItemExists(id))
+		{
+			return NotFound();
+		}
+		return _item!.WithProduct(_context.Products).GetFinalPrice();
+	}
+
 	[HttpPut]
 	public async Task<ActionResult> Put(ShoppingItem item)
 	{
-		_context.Update(item with
-		{
-			Target = await _context.Products.FindAsync(item.ProductId) ?? null!
-		});
+		item.Target ??= await _context.Products.FindAsync(item.ProductId) ?? null!;
+		_context.Update(item);
 		await _context.SaveChangesAsync();
 		return Ok();
 	}
