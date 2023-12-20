@@ -36,7 +36,7 @@ public class ShoppingItemController : ControllerBase
 	{
 		_context.Update(item with
 		{
-			Target = await _context.Products.FindAsync(item.ProductId) ?? throw new InvalidOperationException()
+			Target = await _context.Products.FindAsync(item.ProductId) ?? null!
 		});
 		await _context.SaveChangesAsync();
 		return Ok();
