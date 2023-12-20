@@ -1,11 +1,11 @@
 using WebService.API.Instanced.PromoteStrategy;
 using WebService.API.Virtual.Interface;
 
-namespace WebService.API.Controllers;
+namespace WebService.API.Service.Factory;
 
-public static class AbstractFactory
+public static class PromoteFactory
 {
-	public static IPromoteStrategy GetPromote(string strategy)
+	public static IPromoteStrategy Create(string strategy)
 	{
 		return strategy switch
 		{

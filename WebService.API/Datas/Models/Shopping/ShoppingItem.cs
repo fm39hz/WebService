@@ -1,4 +1,4 @@
-using WebService.API.Controllers;
+using WebService.API.Service.Factory;
 using WebService.API.Virtual.Abstract;
 using WebService.API.Virtual.Interface;
 
@@ -8,7 +8,7 @@ public record ShoppingItem : ModelBase
 {
 	public IPromoteStrategy AppliedPromoteStrategy
 	{
-		get { return AbstractFactory.GetPromote(PromoteType!); }
+		get { return PromoteFactory.Create(PromoteType!); }
 	}
 
 	public string? PromoteType { get; init; }

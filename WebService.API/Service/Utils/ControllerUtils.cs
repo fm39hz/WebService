@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using WebService.API.Datas.Models.Products;
 using WebService.API.Virtual.Abstract;
 
-namespace WebService.API.Service;
+namespace WebService.API.Service.Utils;
 
 public static class ControllerUtils
 {
