@@ -41,7 +41,6 @@ public class ProductController : ControllerBase
 		return _item;
 	}
 
-
 	[HttpPut]
 	public async Task<IActionResult> Put(Product product)
 	{
