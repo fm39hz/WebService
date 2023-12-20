@@ -49,6 +49,7 @@ public class ShoppingItemController : ControllerBase
 		{
 			return Problem("Items already exists");
 		}
+		item.Target ??= await _context.Products.FindAsync(item.ProductId) ?? null!;
 		_context.ShoppingItems.Add(item);
 		await _context.SaveChangesAsync();
 		return CreatedAtAction("Get", new { id = item.Id }, item);
