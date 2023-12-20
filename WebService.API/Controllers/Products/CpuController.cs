@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using WebService.API.Datas.Context;
 using WebService.API.Datas.Models.Products;
 using WebService.API.Service;
+using WebService.API.Service.Utils;
 
 namespace WebService.API.Controllers.Products;
 
@@ -62,7 +63,7 @@ public class CpuController : ControllerBase
 		{
 			return Problem("Cpu already exists");
 		}
-		if (cpu.Product != null) _context.EnsureProductsExists(cpu.Product);
+		cpu.Product!.Type = "Cpu";
 		_context.Cpus.Add(cpu);
 		await _context.SaveChangesAsync();
 
@@ -82,10 +83,9 @@ public class CpuController : ControllerBase
 		{
 			return NotFound();
 		}
-
 		_context.Cpus.Remove(_item.WithProduct(_context.Products));
+		_context.Products.RemoveProduct(_item);
 		await _context.SaveChangesAsync();
-
 		return NoContent();
 	}
 

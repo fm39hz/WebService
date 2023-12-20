@@ -2,9 +2,8 @@ using WebService.API.Virtual.Abstract;
 
 namespace WebService.API.Datas.Models.Products;
 
-public record Vga : ModelBase
+public sealed record Vga : ProductBase
 {
-	public float Frequency { get; set; }
-	public int Vram { get; set; }
-	public virtual Product? Product { get; set; }
+	public double Frequency { get; init; }
+	public int Vram { get; init; }
 }

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using WebService.API.Datas.Context;
+using WebService.API.Service.Factory;
 
 namespace WebService.API.Controllers.Shopping;
 
@@ -22,6 +23,6 @@ public class PromoteController : ControllerBase
 		{
 			return NotFound();
 		}
-		return _product.GetPromotePrice(AbstractFactory.GetPromote(_product.Type!));
+		return _product.GetPromotedPrice(PromoteFactory.Create(_product.Type!));
 	}
 }
