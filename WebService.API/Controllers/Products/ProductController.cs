@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using WebService.API.Datas.Context;
+using WebService.API.Service.Factory;
 using WebService.API.Service.Utils;
 using WebService.API.Virtual.Abstract;
 
@@ -56,5 +57,16 @@ public class ProductController : ControllerBase
 	private bool ItemExists(int id)
 	{
 		return _context.Products.ItemExists(id);
+	}
+
+	[HttpGet("Promoted/{id:int}")]
+	public async Task<ActionResult<double>> GetPromotePrice(int id)
+	{
+		var _product = await _context.Products.FindAsync(id);
+		if (_product is null)
+		{
+			return NotFound();
+		}
+		return _product.GetPromotedPrice(PromoteFactory.Create(_product.Type!));
 	}
 }
