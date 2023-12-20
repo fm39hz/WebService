@@ -41,10 +41,10 @@ public class ProductController : ControllerBase
 	}
 
 
-	[HttpPut("{id:int}")]
-	public async Task<IActionResult> Put(int id, Product product)
+	[HttpPut]
+	public async Task<IActionResult> Put(Product product)
 	{
-		if (!ItemExists(id))
+		if (!ItemExists(product.Id))
 		{
 			return NotFound();
 		}

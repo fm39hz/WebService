@@ -19,7 +19,6 @@ public class VgaController : ControllerBase
 		_context = context;
 	}
 
-	// GET: api/Vgas
 	[HttpGet]
 	public async Task<ActionResult<IEnumerable<Vga>>> GetAll()
 	{
@@ -31,7 +30,6 @@ public class VgaController : ControllerBase
 		return _vgas.Select(v => v.WithProduct(_context.Products)).ToList();
 	}
 
-	// GET: api/Vgas/0
 	[HttpGet("{id:int}")]
 	public async Task<ActionResult<Vga>> Get(int id)
 	{
@@ -49,33 +47,18 @@ public class VgaController : ControllerBase
 		return _item.WithProduct(_context.Products);
 	}
 
-
-	// PUT: api/Vgas/5
-	// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-	[HttpPut("{id:int}")]
-	public async Task<IActionResult> Put(int id, Vga vga)
+	[HttpPut]
+	public async Task<IActionResult> Put(Vga vga)
 	{
-		vga.Id = id;
+		if (ItemExists(vga.Id))
+		{
+			return NotFound();
+		}
 		_context.Update(vga);
-
-		try
-		{
-			await _context.SaveChangesAsync();
-		}
-		catch (DbUpdateConcurrencyException)
-		{
-			if (!ItemExists(id))
-			{
-				return NotFound();
-			}
-			throw;
-		}
-
+		await _context.SaveChangesAsync();
 		return Ok();
 	}
 
-	// POST: api/Vgas
-	// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
 	[HttpPost]
 	public async Task<ActionResult<Vga>> Post(Vga vga)
 	{
@@ -90,21 +73,15 @@ public class VgaController : ControllerBase
 		return CreatedAtAction("Get", new { id = vga.Id }, vga);
 	}
 
-	// DELETE: api/Vgas/5
 	[HttpDelete("{id:int}")]
 	public async Task<IActionResult> Delete(int id)
 	{
-		if (!ItemExists(id))
-		{
-			return NotFound();
-		}
 		var _item = await _context.Vgas.FindAsync(id);
-		if (_item == null)
+		if (_item == null || !ItemExists(id))
 		{
 			return NotFound();
 		}
 		_context.Vgas.Remove(_item.WithProduct(_context.Products));
-		_context.Products.RemoveProduct(_item);
 		await _context.SaveChangesAsync();
 		return NoContent();
 	}

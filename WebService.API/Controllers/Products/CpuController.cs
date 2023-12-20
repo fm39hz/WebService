@@ -18,7 +18,6 @@ public class CpuController : ControllerBase
 		_context = context;
 	}
 
-	// GET: api/Cpus
 	[HttpGet]
 	public async Task<ActionResult<List<Cpu>>> GetAll()
 	{
@@ -26,7 +25,6 @@ public class CpuController : ControllerBase
 		return _cpus.Select(cpu => cpu.WithProduct(_context.Products)).ToList();
 	}
 
-	// GET: api/Cpus/0
 	[HttpGet("{id:int}")]
 	public async Task<ActionResult<Cpu>> Get(int id)
 	{
@@ -38,24 +36,18 @@ public class CpuController : ControllerBase
 		return _item.WithProduct(_context.Products);
 	}
 
-
-	// PUT: api/Cpus/0
-	// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-	[HttpPut("{id:int}")]
-	public async Task<IActionResult> Put(int id, Cpu cpu)
+	[HttpPut]
+	public async Task<IActionResult> Put(Cpu cpu)
 	{
-		if (!ItemExists(id))
+		if (!ItemExists(cpu.Id))
 		{
 			return NotFound();
 		}
-		cpu.Id = id;
 		_context.Update(cpu);
 		await _context.SaveChangesAsync();
 		return Ok();
 	}
 
-	// POST: api/Cpus
-	// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
 	[HttpPost]
 	public async Task<ActionResult<Cpu>> Post(Cpu cpu)
 	{
@@ -70,23 +62,17 @@ public class CpuController : ControllerBase
 		return CreatedAtAction("Get", new { id = cpu.Id }, cpu);
 	}
 
-	// DELETE: api/Cpus/0
 	[HttpDelete("{id:int}")]
 	public async Task<IActionResult> Delete(int id)
 	{
-		if (!ItemExists(id))
-		{
-			return NotFound();
-		}
 		var _item = await _context.Cpus.FindAsync(id);
-		if (_item == null)
+		if (_item == null || !ItemExists(id))
 		{
 			return NotFound();
 		}
 		_context.Cpus.Remove(_item.WithProduct(_context.Products));
-		_context.Products.RemoveProduct(_item);
 		await _context.SaveChangesAsync();
-		return NoContent();
+		return Ok();
 	}
 
 	private bool ItemExists(int id)
