@@ -51,9 +51,8 @@ public class DataContext : DbContext
 		{
 			entity.HasKey(e => e.Id);
 			entity.HasOne(e => e.Target)
-			.WithMany()
-			.HasForeignKey(e => e.ProductId)
-			.IsRequired();
+			.WithOne()
+			.HasForeignKey<ShoppingItem>(i => i.ProductId);
 			entity.HasOne<ShoppingCart>()
 			.WithMany(c => c.ShoppingItems)
 			.HasForeignKey(i => i.CartId);
