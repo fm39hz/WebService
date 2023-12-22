@@ -66,9 +66,9 @@ public class VgaController : ControllerBase
 		{
 			return Problem("Vga already exists");
 		}
-		if (vga.Product is null || vga.Product.Id > 0)
+		if (vga.Product is null)
 		{
-			return Problem("Product must been specified without id");
+			return Problem("Product must been specified");
 		}
 		vga.Product!.Type = "Vga";
 		_context.Vgas.Add(vga);

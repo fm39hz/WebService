@@ -55,9 +55,9 @@ public class CpuController : ControllerBase
 		{
 			return Problem("Cpu already exists");
 		}
-		if (cpu.Product is null || cpu.Product.Id > 0)
+		if (cpu.Product is null)
 		{
-			return Problem("Product must been specified without id");
+			return Problem("Product must been specified");
 		}
 		cpu.Product!.Type = "Cpu";
 		_context.Cpus.Add(cpu);
