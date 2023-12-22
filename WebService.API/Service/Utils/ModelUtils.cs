@@ -22,7 +22,7 @@ public static class ModelUtils
 		context.Orders.Load();
 		foreach (var _item in context.ShoppingItems.Where(i => i.OrderId == order.Id))
 		{
-			order.Items.Add(_item);
+			order.Items.Add(_item.WithProduct(context.Products));
 		}
 		return order with
 		{
