@@ -78,6 +78,19 @@ public class ShoppingItemController : ControllerBase
 		return Ok();
 	}
 
+	[HttpDelete("{id:int}")]
+	public async Task<IActionResult> Delete(int id)
+	{
+		var _item = await _context.ShoppingItems.FindAsync(id);
+		if (_item == null || !ItemExists(id))
+		{
+			return NotFound();
+		}
+		_context.ShoppingItems.Remove(_item);
+		await _context.SaveChangesAsync();
+		return Ok();
+	}
+
 	private bool ItemExists(int id)
 	{
 		return _context.ShoppingItems.ItemExists(id);
