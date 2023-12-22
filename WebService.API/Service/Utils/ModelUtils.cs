@@ -20,14 +20,12 @@ public static class ModelUtils
 	public static Order WithItems(this Order order, DataContext context)
 	{
 		context.Orders.Load();
-		var _items = order.Items;
 		foreach (var _item in context.ShoppingItems.Where(i => i.OrderId == order.Id))
 		{
-			_items.Add(_item);
+			order.Items.Add(_item);
 		}
 		return order with
 		{
-			Items = _items.WithShoppingProduct(context).ToList(),
 			User = context.Users.First(u => u.Uid == order.UserUid),
 			Invoice = context.Invoices.First(i => i.OrderId == order.Id),
 			ShippingTarget = context.ShippingInformations.First(i => i.Id == order.ShippingId)

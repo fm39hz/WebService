@@ -62,6 +62,7 @@ public class ShoppingItemController : ControllerBase
 		{
 			return Problem("Items already exists");
 		}
+		item.OrderStatus = "Waiting";
 		item.Target ??= await _context.Products.FindAsync(item.ProductId) ?? null!;
 		item.PromoteType ??= item.Target.Type;
 		if (_context.ShoppingItems.Any(i => i.CartId == item.CartId && i.ProductId == item.ProductId))

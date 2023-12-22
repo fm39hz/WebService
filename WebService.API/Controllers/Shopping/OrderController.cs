@@ -21,7 +21,8 @@ public class OrderController : ControllerBase
 	[HttpGet]
 	public async Task<ActionResult<List<Order>>> GetAll()
 	{
-		return await _context.Orders.ToListAsync();
+		var _orders = await _context.Orders.ToListAsync();
+		return _orders.Select(i => i.WithItems(_context)).ToList();
 	}
 
 	[HttpGet("{userUid}")]
@@ -33,7 +34,7 @@ public class OrderController : ControllerBase
 		}
 		foreach (var _order in _context.Orders.Where(o => o.UserUid == userUid))
 		{
-			yield return _order;
+			yield return _order.WithItems(_context);
 		}
 	}
 

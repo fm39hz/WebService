@@ -51,7 +51,7 @@ public class ShoppingCartController : ControllerBase
 		foreach (var _items in _cart.ShoppingItems.FindAll(i => i.IsSelected == 1))
 		{
 			_items.OrderStatus = "CheckedOut";
-			_targetItems.Add(_items);
+			_targetItems.Add(_items.WithProduct(_context.Products));
 		}
 		if (_targetItems.IsNullOrEmpty())
 		{
