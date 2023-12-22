@@ -18,6 +18,15 @@ public class UserController : ControllerBase
 		_authService = FirebaseAuth.GetAuth(firebaseApp);
 	}
 
+	[HttpGet]
+	public async IAsyncEnumerable<UserRecord> GetAll()
+	{
+		foreach (var _user in _context.Users)
+		{
+			yield return await _authService.GetUserAsync(_user.Uid);
+		}
+	}
+
 	[HttpGet("{uid}")]
 	public async Task<ActionResult<UserRecord>> Get(string uid)
 	{

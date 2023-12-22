@@ -50,7 +50,7 @@ public class VgaController : ControllerBase
 	[HttpPut]
 	public async Task<IActionResult> Put(Vga vga)
 	{
-		if (ItemExists(vga.Id))
+		if (!ItemExists(vga.Id))
 		{
 			return NotFound();
 		}
@@ -65,6 +65,10 @@ public class VgaController : ControllerBase
 		if (ItemExists(vga.Id))
 		{
 			return Problem("Vga already exists");
+		}
+		if (vga.Product is null)
+		{
+			return Problem("Product must been specified");
 		}
 		vga.Product!.Type = "Vga";
 		_context.Vgas.Add(vga);

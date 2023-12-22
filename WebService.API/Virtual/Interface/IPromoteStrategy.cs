@@ -5,6 +5,7 @@ namespace WebService.API.Virtual.Interface;
 public interface IPromoteStrategy
 {
 	public string Details { get; }
+	public string ShortHand { get; }
 
 	public double DoDiscount(double basePrice);
 

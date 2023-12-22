@@ -17,6 +17,21 @@ public static class ModelUtils
 		};
 	}
 
+	public static Order WithItems(this Order order, DataContext context)
+	{
+		context.Orders.Load();
+		foreach (var _item in context.ShoppingItems.Where(i => i.OrderId == order.Id))
+		{
+			order.Items.Add(_item.WithProduct(context.Products));
+		}
+		return order with
+		{
+			User = context.Users.First(u => u.Uid == order.UserUid),
+			Invoice = context.Invoices.First(i => i.OrderId == order.Id),
+			ShippingTarget = context.ShippingInformations.First(i => i.Id == order.ShippingId)
+		};
+	}
+
 	public static IEnumerable<ShoppingItem> WithShoppingProduct(this IEnumerable<ShoppingItem> items,
 		DataContext context)
 	{
