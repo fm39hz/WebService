@@ -11,11 +11,11 @@ public record ShoppingItem : ModelBase
 		get { return PromoteFactory.Create(PromoteType!); }
 	}
 
-	public string? PromoteType { get; init; }
+	public string? PromoteType { get; set; }
 	public virtual Product? Target { get; set; }
 	public int ProductId { get; init; }
 	public int CartId { get; init; }
-	public int Quantity { get; init; }
+	public int Quantity { get; set; }
 	public int IsSelected { get; init; }
 
 	public double GetFinalPrice()
