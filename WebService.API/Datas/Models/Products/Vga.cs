@@ -4,6 +4,6 @@ namespace WebService.API.Datas.Models.Products;
 
 public sealed record Vga : ProductBase
 {
-	public double Frequency { get; init; }
-	public int Vram { get; init; }
+	public string? Frequency { get; init; }
+	public string? Vram { get; init; }
 }
