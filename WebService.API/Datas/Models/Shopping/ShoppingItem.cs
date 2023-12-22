@@ -11,6 +11,8 @@ public record ShoppingItem : ModelBase
 		get { return PromoteFactory.Create(PromoteType!); }
 	}
 
+	public string? OrderStatus { get; set; } = "Waiting";
+	public int? OrderId { get; init; }
 	public string? PromoteType { get; set; }
 	public virtual Product? Target { get; set; }
 	public int ProductId { get; init; }
