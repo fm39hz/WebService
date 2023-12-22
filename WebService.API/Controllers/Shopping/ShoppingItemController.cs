@@ -69,13 +69,12 @@ public class ShoppingItemController : ControllerBase
 			var _item = _context.ShoppingItems.First(i => i.CartId == item.CartId && i.ProductId == item.ProductId);
 			_item.Quantity += item.Quantity;
 			_context.Update(_item);
+			await _context.SaveChangesAsync();
+			return Ok();
 		}
-		else
-		{
-			_context.ShoppingItems.Add(item);
-		}
+		_context.ShoppingItems.Add(item);
 		await _context.SaveChangesAsync();
-		return Ok();
+		return CreatedAtAction("Get", new { id = item.Id }, item);
 	}
 
 	[HttpDelete("{id:int}")]
