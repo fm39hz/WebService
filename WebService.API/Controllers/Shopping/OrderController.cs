@@ -48,7 +48,7 @@ public class OrderController : ControllerBase
 		return _order.WithItems(_context);
 	}
 
-	[HttpPut("{id}")]
+	[HttpPut("{id:int}/{status:alpha}")]
 	public async Task<IActionResult> Put(int id, string status)
 	{
 		if (!ItemExists(id))
