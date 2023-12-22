@@ -15,6 +15,8 @@ public class DataContext : DbContext
 	public DbSet<UserInstance> Users { get; init; } = null!;
 	public DbSet<Product> Products { get; init; } = null!;
 	public DbSet<ShoppingCart> ShoppingCarts { get; init; } = null!;
+	public DbSet<Order> Orders { get; init; } = null!;
+	public DbSet<Invoice> Invoices { get; init; } = null!;
 	public DbSet<ShippingInformation> ShippingInformations { get; init; } = null!;
 	public DbSet<ShoppingItem> ShoppingItems { get; init; } = null!;
 	public DbSet<Vga> Vgas { get; init; } = null!;
@@ -25,8 +27,27 @@ public class DataContext : DbContext
 		modelBuilder.Entity<UserInstance>(entity =>
 		{
 			entity.HasKey(u => u.Uid);
-			entity.HasOne(u => u.ShippingInfo)
-			.WithOne().HasForeignKey<ShippingInformation>(i => i.UserUId);
+			entity.HasMany(u => u.ShippingInfomations)
+			.WithOne().HasForeignKey(i => i.UserUId);
+			entity.HasMany(u => u.Invoices)
+			.WithOne()
+			.HasForeignKey(i => i.UserUid);
+		});
+		modelBuilder.Entity<Invoice>(entity =>
+		{
+			entity.HasKey(i => i.Id);
+			entity.HasOne<Order>()
+			.WithOne(o => o.Invoice)
+			.HasForeignKey<Invoice>(i => i.OrderId);
+		});
+		modelBuilder.Entity<Order>(entity =>
+		{
+			entity.HasOne(o => o.User)
+			.WithOne()
+			.HasForeignKey<Order>(o => o.UserUid);
+			entity.HasOne(o => o.ShippingTarget)
+			.WithOne()
+			.HasForeignKey<Order>(o => o.ShippingId);
 		});
 		modelBuilder.Entity<Product>(entity =>
 		{
@@ -56,6 +77,9 @@ public class DataContext : DbContext
 			entity.HasOne<ShoppingCart>()
 			.WithMany(c => c.ShoppingItems)
 			.HasForeignKey(i => i.CartId);
+			entity.HasOne<Order>()
+			.WithMany(o => o.Items)
+			.HasForeignKey(i => i.OrderId);
 		});
 		base.OnModelCreating(modelBuilder);
 	}
