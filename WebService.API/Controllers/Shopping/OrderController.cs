@@ -57,6 +57,7 @@ public class OrderController : ControllerBase
 			return NotFound();
 		}
 		var _order = await _context.Orders.FindAsync(id);
+		_order!.Status = status;
 		foreach (var _item in _order.Items)
 		{
 			_item.OrderStatus = status;

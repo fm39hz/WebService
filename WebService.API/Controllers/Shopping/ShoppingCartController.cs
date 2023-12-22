@@ -78,7 +78,8 @@ public class ShoppingCartController : ControllerBase
 			User = _user,
 			Invoice = _invoice,
 			ShippingTarget = information,
-			Items = _targetItems
+			Items = _targetItems,
+			Status = "CheckedOut"
 		};
 		_context.Orders.Add(_order);
 		await _context.SaveChangesAsync();

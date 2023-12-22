@@ -49,6 +49,7 @@ public class ShoppingItemController : ControllerBase
 		{
 			return NotFound();
 		}
+		item.OrderStatus = item.OrderId.HasValue? (await _context.Orders.FindAsync(item.OrderId))!.Status! : "Waiting";
 		item.Target ??= await _context.Products.FindAsync(item.ProductId) ?? null!;
 		_context.Update(item);
 		await _context.SaveChangesAsync();
