@@ -50,7 +50,7 @@ public class VgaController : ControllerBase
 	[HttpPut]
 	public async Task<IActionResult> Put(Vga vga)
 	{
-		if (ItemExists(vga.Id))
+		if (!ItemExists(vga.Id))
 		{
 			return NotFound();
 		}
