@@ -5,6 +5,7 @@ using WebService.API.Datas.Context;
 using WebService.API.Service.Factory;
 using WebService.API.Service.Utils;
 using WebService.API.Virtual.Abstract;
+using WebService.API.Virtual.Interface;
 
 namespace WebService.API.Controllers.Products;
 
@@ -67,5 +68,16 @@ public class ProductController : ControllerBase
 			return NotFound();
 		}
 		return _product.GetPromotedPrice(PromoteFactory.Create(_product.Type!));
+	}
+
+	[HttpGet("PromoteDetails/{id:int}")]
+	public async Task<ActionResult<IPromoteStrategy>> GetPromotedDetails(int id)
+	{
+		var _product = await _context.Products.FindAsync(id);
+		if (_product is null)
+		{
+			return NotFound();
+		}
+		return Ok(PromoteFactory.Create(_product.Type!));
 	}
 }

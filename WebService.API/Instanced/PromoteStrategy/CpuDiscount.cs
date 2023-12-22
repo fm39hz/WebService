@@ -10,6 +10,11 @@ public class CpuDiscount : IPromoteStrategy
 		get { return "Giảm giá 15% cho tất cả các sản phẩm thuộc loại Cpu"; }
 	}
 
+	public string ShortHand
+	{
+		get { return "15%"; }
+	}
+
 	public bool CheckCondition(Product product)
 	{
 		return product.Type == "Cpu";

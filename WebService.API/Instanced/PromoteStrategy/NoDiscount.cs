@@ -7,7 +7,12 @@ public class NoDiscount : IPromoteStrategy
 {
 	public string Details
 	{
-		get { return "Mức giá gốc của sản phẩm"; }
+		get { return "Không có chương trình khuyến mại nào được áp dụng"; }
+	}
+
+	public string ShortHand
+	{
+		get { return "NoDiscount"; }
 	}
 
 	public double DoDiscount(double basePrice)
