@@ -22,6 +22,6 @@ public record ShoppingItem : ModelBase
 
 	public double GetFinalPrice()
 	{
-		return Target.GetPromotedPrice(AppliedPromoteStrategy) * Quantity;
+		return Target!.GetPromotedPrice(AppliedPromoteStrategy) * Quantity;
 	}
 }
