@@ -1,6 +1,7 @@
 using Firebase.Auth;
 using Microsoft.AspNetCore.Mvc;
 using WebService.API.Datas.Context;
+using WebService.API.Datas.Models.Shopping;
 using WebService.API.Datas.Models.Users;
 using WebService.API.Service.Firebase;
 
@@ -30,6 +31,10 @@ public class AuthenticationController : ControllerBase
 		_context.Users.Add(new UserInstance(_userCredentials.User.Uid)
 		{
 			Credential = _userCredentials.User.Credential.IdToken
+		});
+		_context.ShoppingCarts.Add(new ShoppingCart
+		{
+			UserUid = _userCredentials.User.Uid
 		});
 		await _context.SaveChangesAsync();
 		return _userCredentials.User.Uid;
